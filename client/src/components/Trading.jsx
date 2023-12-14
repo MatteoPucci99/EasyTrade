@@ -288,8 +288,12 @@ const Trading = (props) => {
   }, [isClickedEvent]);
   
   useEffect(() => {
-      
-    setSendData({...sendData, reward: "" });
+    if(typeStatus === 'Take Profit')
+    {setSendData({...sendData, reward: "" });} else if (typeStatus === 'Stop Loss') {
+      setSendData({...sendData, reward: (-sendData.risk).toString()})
+    } else {
+      setSendData({...sendData, reward:'0'})
+    }
   }, [typeStatus]);
 
   const handleInputChange = (e) => {

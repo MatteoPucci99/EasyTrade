@@ -101,8 +101,12 @@ const History = (props)=>{
     }
 
     useEffect(() => {
-      
-      setSendTrade({...sendTrade, reward: "" });
+      if(typeStatus === 'Take Profit')
+      {setSendTrade({...sendTrade, reward: "" });} else if (typeStatus === 'Stop Loss') {
+        setSendTrade({...sendTrade, reward: (-sendTrade.risk).toString()})
+      } else {
+        setSendTrade({...sendTrade, reward:'0'})
+      }
     }, [typeStatus]);
 
     const handleInputChange = (e) => {
