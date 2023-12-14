@@ -86,7 +86,7 @@ const TradeNumber = ()=>{
         <Container className="darkthemeBgCards rounded-4 boxshadow p-3 h-100">
             <h4 className="darkthemeText ms-3 mt-2 mb-4">Numero di operazioni</h4>
             <div className="d-flex align-items-center justify-content-center">
-                <div style={{width:'60%'}}>
+                <div>
                 {dati && (<ReactApexChart options={dati.options} series={dati.series} type="donut" width={380} />)}
 
                 </div>

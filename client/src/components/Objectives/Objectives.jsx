@@ -21,13 +21,13 @@ const Objectives = (props)=>{
         <Container className="darkthemeText">
             <h4>Obiettivi</h4>
             <Row>
-                <Col md={3}>
+                <Col xs={12} sm={12} md={3} xl={3} className="mt-2">
                     <GeneralObjectives singleStrategy={props.singleStrategy}/>
                 </Col>
-                <Col md={5}>
+                <Col xs={12} sm={6} md={5} xl={5} className="mt-2">
                     <MonthlyResult singleStrategy={props.singleStrategy} handleSelectedMonth={handleSelectedMonth}/>
                 </Col>
-                <Col md={4}>
+                <Col xs={12} sm={6} md={4} xl={4} className="mt-2">
                     <AnimatePresence>
                         {isWeeklyObjectivesOpen && (
                           <motion.div

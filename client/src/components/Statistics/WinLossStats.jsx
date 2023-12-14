@@ -7,7 +7,7 @@ const WinLossStats = ()=>{
     
     return (
         <Container className="darkthemeBgCards boxshadow rounded-4" >
-            <Row className="row-cols-2">
+            <Row className="row-cols-1 row-cols-sm-2">
                 <Col>
                  <WinCircularStats/>
                 </Col>

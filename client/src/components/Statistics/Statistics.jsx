@@ -34,10 +34,10 @@ const Statistics = (props)=>{
                                          
                     </Row>
                 </Col>
-                <Col xs={12} md={12} lg={6} className="mt-4">
+                <Col xs={12} md={12} lg={12} xl={7} className="mt-4">
                     <TradeNumber/>
                 </Col>
-                <Col xs={12} md={12} lg={6} className="mt-4">
+                <Col xs={12} md={12} lg={12} xl={5} className="mt-4">
                     <PerformancePair strategyData = {props.strategyData}/>
                 </Col>
                 <Col md={4} className="mt-4">

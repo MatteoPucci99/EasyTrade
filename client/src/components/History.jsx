@@ -144,7 +144,7 @@ const History = (props)=>{
                 <h3>Storico</h3>
                 <Row className="darkthemeBgCards boxshadow rounded-4 p-3">
                     <h5 className="mt-2">Lista dei trade</h5>
-                    <Col className="mt-3">
+                    <Col className="mt-3" >
                         <Row className="border-bottom border-secondary">
                             <Col><p className="fw-bold">Pair</p></Col>
                             <Col><p className="fw-bold">Tipo</p></Col>

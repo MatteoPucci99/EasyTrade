@@ -121,14 +121,49 @@ label {
   box-shadow: 4px 4px 21px 4px rgba(0, 0, 0, 0.5);
 }
 
-@media screen and (min-width: 770px) and (max-width: 1300px) {
-  .width {
-    width: 350px !important;
+/* MYSTRATEGIES RESPONSIVENESS */
+@media (max-width: 576px) {
+  .custom-margin {
+    margin-top: 10px !important;
   }
 }
-@media screen and (min-width: 1300px) {
+
+@media screen and (min-width: 1727px) {
   .width {
     width: 430px !important;
+  }
+}
+@media screen and (min-width: 1500px) and (max-width: 1727px) {
+  .width {
+    width: 32% !important;
+  }
+}
+@media screen and (min-width: 1211px) and (max-width: 1500px) {
+  .width {
+    width: 49% !important;
+  }
+}
+@media screen and (min-width: 1150px) and (max-width: 1211px) {
+  .width {
+    width: 48% !important;
+  }
+}
+@media screen and (min-width: 990px) and (max-width: 1150px) {
+  .width {
+    width: 100% !important;
+  }
+}
+
+@media screen and (min-width: 770px) and (max-width: 990px) {
+  .width {
+    width: 48% !important;
+  }
+}
+
+/* CREATE/UPDATE STRATEGY RESPONSIVENESS */
+@media screen and (max-width: 576px) {
+  .customMarginCreate {
+    margin-top: 10px !important;
   }
 }
 

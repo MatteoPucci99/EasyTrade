@@ -26,10 +26,12 @@ const MyStrategies = ()=>{
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, duration: 0.15 }}>
         <Container>
-             <Row className="mt-3">
-                <Col className="d-flex justify-content-between ps-0">
+             <Row className="mt-3 d-flex justify-content-between">
+                <Col className="ps-0" xs={12} sm={6}>
                  <StrategyFilter setSearch={handleSearch}/>
-                 <button  className="align-self-end d-flex align-items-center save" style={{height:'50%'}}  onClick={()=>{navigate('/createstrategy')}}> <IoMdAdd className="me-2" style={{fontSize:'1.15em'}}/>Nuova strategia</button>
+                </Col>
+                <Col className='d-flex justify-content-end custom-margin' xs={12} sm={6}>
+                 <button  className="align-self-end d-flex align-items-center save" style={{height:'38px'}}  onClick={()=>{navigate('/createstrategy')}}> <IoMdAdd className="me-2" style={{fontSize:'1.15em'}}/>Nuova strategia</button>
                 </Col>
             </Row>
             <Row className="mt-3 ">

@@ -28,7 +28,7 @@ const SingleStrategy = (props)=>{
             </Col>
 
             <h5 className="text-center mt-3">Obiettivi di trading</h5>
-            <Col xs={6}>
+            <Col xs={12} sm={6}>
                 <div className="mt-2 border border-secondary rounded-4 p-3">
                     <h6 className="text-center text-secondary">MENSILE</h6>
                     <div className="d-flex justify-content-between">
@@ -42,7 +42,7 @@ const SingleStrategy = (props)=>{
                 </div>
 
             </Col>
-            <Col xs={6}>
+            <Col xs={12} sm={6}>
                 <div className=" mt-2 border border-secondary rounded-4 p-3">
                     <h6 className="text-center text-secondary">SETTIMANALE</h6>
                     <div className="d-flex justify-content-between">

@@ -334,7 +334,7 @@ const Trading = (props) => {
     <Container>
         <Row>
           {props.singleStrategy ? (<h4 className="darkthemeText mb-0 fw-semibold mt-3">Journal di '{props.singleStrategy.params.name}'</h4>) : <h4 className="darkthemeText mb-0 fw-semibold mt-3">Seleziona una strategia</h4>}
-            <Col className="col-12 col-md-12 col-lg-8 p-3 darkthemeBgCards mt-3 rounded-4 boxshadow  me-3">
+            <Col className="col-12 col-lg-12 col-xl-8 p-3 darkthemeBgCards mt-3 rounded-4 boxshadow  me-3">
             
                 <Fullcalendar
                   plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
@@ -352,6 +352,7 @@ const Trading = (props) => {
                   eventContent={eventContent}
                   ref={handleCalendarRef}
                   eventClick={handleEventClick}
+                  handleWindowResize={true}
 
                 />
             </Col>

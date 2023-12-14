@@ -202,20 +202,20 @@ const CreateStrategy = ()=>{
     <Container>
      
       <form onSubmit={handleSubmit}>
-        <div className='d-flex justify-content-between mt-3'>
-          <div>
+        <Row className='mt-3'>
+          <Col xs={12} sm={6}>
           {id ? (<div className='ms-3'><h3 className='darkthemeText mb-0'>Dettagli di '{data.params.name}'</h3> <p className='darkthemeText fs-5'>Visualizza i dettagli e modifica la strategia</p></div>) : (<div className='ms-3'><h3 className='darkthemeText mb-0'>Nuova strategia</h3> <p className='darkthemeText fs-5'>Compilare tutti i campi richiesti e cliccare sull'icona salva</p></div>) }
 
-          </div>
+          </Col>
           
-          <div className='d-flex align-items-center'>
+          <Col className='d-flex align-items-center justify-content-end' xs={12} sm={6}>
           <button className='me-3 d-flex align-items-center save' type='submit'><IoSaveSharp className='me-2 '/>Salva</button>
           {id && (<button type='button' className='delete me-3 d-flex align-items-center' onClick={()=>{handleDeleteModal()}}><RiDeleteBin5Line className='me-2'/>Elimina</button>)}
-          </div>
-        </div>
-        <Row className='mt-2 justify-content-evenly'>
+          </Col>
+        </Row>
+        <Row className='mt-3 justify-content-evenly'>
                  
-              <Col className='darkthemeText p-3 darkthemeBgCards boxshadow rounded-4 me-4' xs={7}>
+              <Col className='darkthemeText p-3 darkthemeBgCards boxshadow rounded-4' sm={6}  xl={7}>
                 {id ? (<h4 className='fw-bold'>Modifica strategia</h4>) : (<h4>Parametri</h4>)}
                
                 <div className="my-4 input-container" data-bs-theme="success">
@@ -250,7 +250,7 @@ const CreateStrategy = ()=>{
                 </div>
                 
               </Col>
-              <Col className='darkthemeText p-3 darkthemeBgCards boxshadow rounded-4 widthObjective' xs={4}>
+              <Col className='darkthemeText p-3 darkthemeBgCards boxshadow rounded-4 widthObjective customMarginCreate' sm={5} xl={4}>
                 <h4 className='fw-bold'>Obiettivi di trading</h4>
                 <h5 className='text-white-50 mb-0 mt-4'>Mensile</h5>
                   <div className="mb-4 mt-3  input-container">
