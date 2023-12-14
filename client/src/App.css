@@ -1,0 +1,449 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+
+#logo {
+  font-family: "Montserrat", sans-serif;
+}
+
+#logout {
+  transition: color 0.3s ease-in-out;
+}
+#logout:hover {
+  color: white !important;
+}
+
+#sideBar {
+  position: fixed;
+  top: 80px;
+  width: 300px;
+}
+
+.darkthemeBg {
+  background-color: rgb(22, 28, 36) !important;
+}
+
+.darkthemeBgCards {
+  background-color: rgb(33, 43, 54);
+}
+
+.darkthemeBgHover {
+  background-color: rgb(33, 43, 54);
+  transition: all 0.3s ease-in-out;
+}
+.darkthemeBgHover:hover {
+  background-color: rgb(40, 50, 60);
+}
+
+.darkthemeText {
+  color: white;
+}
+
+/* CROSS DELETE ICON */
+.deleteCross {
+  color: gray;
+  transition: color 0.3s ease-in-out;
+}
+
+.deleteCross:hover {
+  color: rgb(165, 165, 165);
+}
+
+/* BUTTONS */
+
+.save {
+  background-color: rgb(130, 146, 118);
+  border-radius: 7px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+.save:hover {
+  background-color: rgb(109, 131, 93);
+}
+.delete {
+  background-color: rgb(208, 61, 61);
+  border-radius: 7px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+.delete:hover {
+  background-color: rgb(168, 47, 47);
+}
+
+input {
+  background-color: rgb(33, 43, 54);
+  border: 1px solid rgba(197, 197, 197, 0.418);
+  border-radius: 5px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 35px;
+  padding: 20px;
+}
+
+input:hover {
+  border: 1px solid rgb(255, 255, 255);
+}
+input:focus ~ label,
+input:not(:placeholder-shown):not(:focus) ~ label {
+  position: absolute;
+  top: -12px;
+  left: 13px;
+  background-color: rgb(33, 43, 54);
+  color: rgb(255, 255, 255);
+  font-size: smaller;
+  transition: 0.15s ease-out;
+}
+label {
+  position: absolute;
+  top: 10px;
+  left: 13px;
+  background-color: rgb(33, 43, 54);
+  color: rgba(255, 255, 255, 0.418);
+  transition: 0.15s ease-out;
+  pointer-events: none;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.input-container {
+  position: relative;
+}
+
+.boxshadow {
+  box-shadow: 4px 4px 21px 4px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (min-width: 770px) and (max-width: 1300px) {
+  .width {
+    width: 350px !important;
+  }
+}
+@media screen and (min-width: 1300px) {
+  .width {
+    width: 430px !important;
+  }
+}
+
+/* CALENDAR STYLE */
+
+.fc-toolbar-chunk > div {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.fc {
+  color: white;
+}
+
+.fc-col-header-cell-cushion {
+  color: white;
+  text-decoration: none;
+}
+
+.fc-daygrid-day-number {
+  color: white;
+  text-decoration: none;
+}
+
+tbody {
+  color: white;
+}
+
+.fc-next-button .fc-butto .fc-button-primary {
+  border-radius: 50px;
+}
+#fc-dom-1 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+:root {
+  --fc-small-font-size: 0.85em;
+  --fc-page-bg-color: #fff;
+  --fc-neutral-bg-color: rgba(208, 208, 208, 0.3);
+  --fc-neutral-text-color: #ffffff;
+  --fc-border-color: #ffffff62;
+
+  --fc-button-text-color: #fff;
+  --fc-button-bg-color: rgb(33, 43, 54);
+  --fc-button-border-color: rgb(33, 43, 54);
+  --fc-button-hover-bg-color: #253646;
+  --fc-button-hover-border-color: #253646;
+  --fc-button-active-bg-color: #1a252f00;
+  --fc-button-active-border-color: #151e2700;
+
+  --fc-event-bg-color: #3788d800;
+  --fc-event-border-color: #3788d800;
+  --fc-event-text-color: #fff;
+  --fc-event-selected-overlay-color: rgba(0, 0, 0, 0.25);
+
+  --fc-more-link-bg-color: #d0d0d0;
+  --fc-more-link-text-color: white;
+
+  --fc-event-resizer-thickness: 8px;
+  --fc-event-resizer-dot-total-width: 8px;
+  --fc-event-resizer-dot-border-width: 1px;
+
+  --fc-non-business-color: rgba(215, 215, 215, 0.3);
+  --fc-bg-event-color: rgb(143, 223, 130);
+  --fc-bg-event-opacity: 0.3;
+  --fc-highlight-color: rgba(188, 232, 241, 0.3);
+  --fc-today-bg-color: rgba(255, 220, 40, 0.15);
+  --fc-now-indicator-color: red;
+}
+
+/* END CALENDAR STYLE */
+
+/* FORM TRADE STYLE */
+.tradeButton {
+  border: none;
+  width: 50%;
+  height: 40px;
+}
+
+.tradeButton.sell {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 1px solid rgb(208, 61, 61);
+  border-left: none;
+  font-weight: bold;
+  color: rgb(208, 61, 61);
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+.tradeButton.buy {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 1px solid rgb(94, 161, 59);
+  font-weight: bold;
+  color: rgb(94, 161, 59);
+  background-color: transparent;
+  border-right: none;
+  transition: all 0.3s ease-in-out;
+}
+.selectedSell {
+  background-color: rgb(208, 61, 61) !important;
+  color: white !important;
+}
+.selectedBuy {
+  background-color: rgb(94, 161, 59) !important;
+  color: white !important;
+}
+
+#tradeButtonContainer {
+  width: 80%;
+}
+/*END FORM TRADE STYLE */
+.deleteIcon {
+  transition: background-color 0.2s ease;
+}
+.deleteIcon:hover {
+  background-color: rgba(177, 177, 177, 0.315);
+}
+
+/* PROGRESS BAR STYLE */
+.progress-container {
+  height: 30px;
+  background-color: rgb(51, 61, 72);
+  border-radius: 10px;
+}
+
+.progress-bar {
+  background-color: rgb(94, 161, 59) !important;
+  width: 0%;
+  z-index: 2;
+  height: 30px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: width 1s ease !important;
+}
+.full-width-bar {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.dd-container {
+  height: 30px;
+  background-color: rgb(51, 61, 72);
+  border-radius: 10px;
+}
+
+.dd-bar {
+  background-color: rgb(185, 82, 79) !important;
+  width: 0%;
+  z-index: 2;
+  height: 30px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: width 1s ease !important;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+ul li {
+  list-style-type: none;
+  transition: all 0.2s ease-in-out;
+  border-radius: 0.7em;
+}
+
+ul a {
+  color: rgb(184, 184, 184) !important;
+}
+
+li:hover {
+  background-color: #3c47508a;
+  color: white;
+}
+
+a.active {
+  color: white !important;
+  font-weight: bolder;
+}
+
+/* SIDEBAR DROPDOWN ANIMATION */
+@keyframes vibrate {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+  75% {
+    transform: translateX(-2px);
+  }
+  100% {
+    transform: translateX(2px);
+  }
+}
+
+.vibrate {
+  animation: vibrate 0.5s ease-in-out infinite;
+}
+.pulsate {
+  animation: pulsateAnimation 2s infinite;
+}
+
+@keyframes pulsateAnimation {
+  0% {
+    color: rgb(130, 146, 118);
+    transform: scale(1);
+  }
+  50% {
+    color: rgb(255, 187, 0); /* Cambia colore a tuo piacimento */
+    transform: scale(1.05);
+  }
+  100% {
+    color: rgb(130, 146, 118);
+    transform: scale(1);
+  }
+}
+/* HISTORY */
+/* TAKE PROFIT , STOPLOSS & BREAKEVEN TAG */
+
+.sl {
+  background-color: rgb(61, 46, 55);
+  color: rgb(201, 88, 88);
+  padding-left: 10px;
+  width: 55%;
+  border-radius: 7px;
+}
+.tp {
+  background-color: rgb(43, 62, 54);
+  color: rgb(114, 184, 79);
+  padding-left: 10px;
+  width: 60%;
+  border-radius: 7px;
+}
+
+.be {
+  background-color: rgb(69, 67, 46);
+  color: rgb(232, 205, 98);
+  padding-left: 10px;
+  width: 63%;
+  border-radius: 7px;
+}
+/* HOVER ROW */
+.hover {
+  transition: all 0.3s ease-in-out;
+}
+.hover:hover {
+  background-color: rgb(40, 51, 63);
+}
+
+/* HOVER ICON */
+.hoverIcon {
+  transition: all 0.3s ease-in-out;
+}
+.hoverIcon:hover {
+  background-color: rgb(49, 59, 70);
+}
+
+/* BUY & SELL */
+.buyType {
+  color: rgb(94, 161, 59);
+}
+.sellType {
+  color: rgb(185, 82, 79);
+}
+/* END HISTORY */
+/* LOGIN */
+.showPass {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.component {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+.component.visible {
+  opacity: 1;
+}
+
+/* ALERT POSITION E TRANSITION */
+.alertPosition {
+  width: 350px;
+  position: fixed !important;
+  top: -70px;
+  right: 750px;
+  opacity: 0; /* Imposta l'opacità iniziale a 0 (completamente invisibile) */
+  animation: fadeInOut 1.2s ease;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    top: -70px;
+  }
+  30% {
+    opacity: 1;
+    top: 70px;
+  }
+
+  70% {
+    opacity: 1;
+    top: 70px;
+  }
+
+  100% {
+    opacity: 0;
+    top: 70px;
+  }
+}
