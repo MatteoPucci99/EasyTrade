@@ -21,7 +21,7 @@ const NavBarWidget = () => {
         { proName: 'BITSTAMP:ETHUSD', title: 'Ethereum' },
       ],
       showSymbolLogo: true,
-      colorTheme: 'light',
+      colorTheme: 'dark',
       isTransparent: false,
       displayMode: 'adaptive',
       locale: 'it',
@@ -49,7 +49,7 @@ const NavBarWidget = () => {
       <div className="tradingview-widget-container__widget"></div>
       <div className="tradingview-widget-copyright">
         <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
-          <span className="white-text">Segui tutti i mercati su TradingView</span>
+     
         </a>
       </div>
     </div>
