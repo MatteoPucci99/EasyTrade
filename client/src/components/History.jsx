@@ -144,7 +144,8 @@ const History = (props)=>{
                 <h3>Storico</h3>
                 <Row className="darkthemeBgCards boxshadow rounded-4 p-3">
                     <h5 className="mt-2">Lista dei trade</h5>
-                    <Col className="mt-3" >
+                    <Col className="mt-3" style={{ overflowX: 'auto' }} >
+                      <div style={{width:'1200px'}}>
                         <Row className="border-bottom border-secondary">
                             <Col><p className="fw-bold">Pair</p></Col>
                             <Col><p className="fw-bold">Tipo</p></Col>
@@ -170,8 +171,13 @@ const History = (props)=>{
                                 </div>
                             </Col>
                         </Row>))) : (null)}
-                        <Row className="d-flex justify-content-end mt-3">
-                            <Col xs={3} className="d-flex justify-content-center align-items-center">
+                      </div>
+                    
+                     
+                    </Col>
+                    <div>
+                      <Row className="d-flex justify-content-end mt-3">
+                            <Col xs={12} sm={5} md={4} lg={3} className="d-flex justify-content-center align-items-center">
                                 <p className="mb-0 me-3">Righe per pagina</p>
                                 <Dropdown>
                                   <Dropdown.Toggle variant="outline-secondary" className="px-3 py-1" id="dropdown-basic">
@@ -185,7 +191,7 @@ const History = (props)=>{
                                   </Dropdown.Menu>
                                 </Dropdown>
                             </Col>
-                            <Col xs={2} className="d-flex align-items-center">
+                            <Col xs={12} sm={5} md={4} lg={2} className="d-flex align-items-center justify-content-center">
                                 <div style={{ borderRadius: '50%', height: '30px', width: '30px' }} className="hover d-flex justify-content-center align-items-center">
                                     <GrPrevious style={{cursor:'pointer'}} onClick={handlePrev} />
                                 </div>
@@ -194,15 +200,12 @@ const History = (props)=>{
                                    <GrNext style={{cursor:'pointer'}} onClick={handleNext}/>
                                </div>
 
-                            </Col>                               
+                            </Col>     
+                      </Row>
+                                             
                             
                            
-                        </Row>
-                       
-                                               
-                        
-                        
-                    </Col>
+                    </div>
                 </Row>
             </div>
         </motion.div>    
