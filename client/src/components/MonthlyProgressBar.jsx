@@ -1,10 +1,10 @@
 import { format } from "date-fns"
 import itLocale from 'date-fns/locale/it';
 import { Col, Container, Row } from "react-bootstrap"
-import { useSelector } from "react-redux"
+
 
 const MonthlyProgressBar = (props)=>{
-    const trades = useSelector(state=>state.trades.content)
+    
    
 
 
@@ -30,7 +30,7 @@ const MonthlyProgressBar = (props)=>{
                             <span className="fw-semibold">Profitto</span>
                         </div>
                         <div className="fw-bold" style={{color:'rgb(94,161,59)'}}>
-                          {props.totalProfit}%/  
+                          <span style={{color: props.totalProfit <= 0 ? 'gray' : ''}}>{props.totalProfit}%</span> <span className="me-1">/</span>  
                           {props.singleStrategy ? (props.singleStrategy.targets.month.profit) : (null)}%
                             
                         </div>
@@ -40,7 +40,7 @@ const MonthlyProgressBar = (props)=>{
                     <div className="progress-container" style={{height:'20px'}}>
                         <div 
                         className={`progress-bar ${isFullWidthProfit ? 'full-width-bar' : ''}`}
-                        style={{ width: `${progressBarProfit}%`, height:'20px' }}>
+                        style={{ width: props.totalProfit <= 0 ? '0%' : `${progressBarProfit}%`, height:'20px'}}>
                            
                         </div>
                     </div>
@@ -51,7 +51,7 @@ const MonthlyProgressBar = (props)=>{
                             <span className="fw-semibold">Drawdown</span>
                         </div>
                         <div className="fw-bold" style={{color:'rgb(185,82,79)'}}>
-                        {props.maxDrawdown}%/
+                        {props.maxDrawdown}% <span className="me-1">/</span>
                         {props.singleStrategy ? (props.singleStrategy.targets.month.dd) : (null)}%
                         </div>
                         

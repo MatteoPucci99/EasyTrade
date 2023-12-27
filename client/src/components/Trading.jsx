@@ -353,6 +353,7 @@ const Trading = (props) => {
                   ref={handleCalendarRef}
                   eventClick={handleEventClick}
                   handleWindowResize={true}
+              
 
                 />
             </Col>

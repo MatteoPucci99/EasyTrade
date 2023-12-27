@@ -70,7 +70,7 @@ const WeeklyObjectives = (props)=>{
     return (
         <Container className="darkthemeBgCards darkthemeText rounded-4 boxshadow">
             <Row className='row-cols-1 px-4 pb-4'>
-                <h4 className="text-center pt-3">{props.selectedMonth && (formatDate(props.selectedMonth))}</h4>
+                <h4 className="text-center pt-3">{props.selectedMonth && (formatDate(props.selectedMonth).slice(0,1).toLocaleUpperCase() + formatDate(props.selectedMonth).slice(1) )}</h4>
             {weeklyTotals.length > 0 ? (weeklyTotals.map(trade=>
                 <Col className="border border-secondary rounded-4 mt-3 p-2">
                     <h6 className="fw-bold text-center text-secondary">{trade.interval.toLocaleUpperCase()}</h6>

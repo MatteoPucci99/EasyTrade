@@ -18,7 +18,7 @@ const Expectancy = ()=>{
     return (
         <Container className="darkthemeBgCards rounded-4 boxshadow darkthemeText d-flex  flex-column justify-content-center align-items-center" style={{height:'300px'}}>
         <div className="text-center" style={{cursor:'pointer'}}     data-tooltip-id="my-tooltip"
-        data-tooltip-html="L'Expectancy rappresenta la quantità media che ci si può aspettare <br> di guadagnare (o perdere) per ogni unità rischiosa in un trade."
+        data-tooltip-html="L'Expectancy rappresenta la quantità media che ci si può aspettare <br> di guadagnare (o perdere) per ogni singolo trade."
         data-tooltip-place="top">       
             <h2>
             {expectancy}
