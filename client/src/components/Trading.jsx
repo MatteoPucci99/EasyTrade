@@ -165,7 +165,7 @@ const Trading = (props) => {
           }
         
           return (
-            <div style={{ backgroundColor, borderRadius, height:'30px', cursor:'pointer' }} className="d-flex align-items-center fw-bold justify-content-between">
+            <div style={{ backgroundColor, borderRadius, height:'30px', cursor:'pointer' }} className="d-flex align-items-center fw-bold justify-content-between text-truncate">
               {arg.event.title.toUpperCase()}
               <div className="deleteIcon d-flex justify-content-center align-items-center" style={{ borderRadius: '50%', height: '25px', width: '25px' }}>
               <RxCross2 style={{fontSize: '1.1em'}} onClick={()=>showDeleteModal(arg.event)}/>
