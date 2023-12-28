@@ -79,7 +79,7 @@ const CreateStrategy = ()=>{
       setDeleteAlert(input);
  
 
-      // Nascondi l'alert dopo 2 secondi
+      
       setTimeout(() => {
         setDeleteAlert(!input);      
         
@@ -92,7 +92,7 @@ const CreateStrategy = ()=>{
       setShowAlert(input);
  
 
-      // Nascondi l'alert dopo 2 secondi
+    
       setTimeout(() => {
         setShowAlert(!input);      
         
@@ -105,7 +105,7 @@ const CreateStrategy = ()=>{
       e.preventDefault();
 
       if(!isValidData()){
-        alert('Compila tutti i campi richiesta');
+        alert('Compila tutti i campi richiesti');
         return;
       }
       if(id){

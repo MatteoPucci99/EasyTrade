@@ -98,8 +98,6 @@ const Trading = (props) => {
         return dateA - dateB;
     });
     
-    // Stampa gli eventi ordinati sulla console
-    console.log(currentEvents);
       
       
       const totalProfit = currentEvents.reduce(
