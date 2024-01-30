@@ -35,31 +35,16 @@ const MonthlyResult = (props)=>{
         }, {});
     
        // Calcola il total reward e total drawdown per ogni mese
-        const monthlyTotals = Object.entries(tradesByMonth).map(([month, trades]) => {
-            let cumulativeReward = 0;
-            let currentDrawdown = 0;
-            let maxDrawdown = 0;
-        
-            const totalReward = trades.reduce((total, trade) => {
-              const reward = parseInt(trade.reward, 10);
-              cumulativeReward += reward;
-            
-              // Calcola il drawdown corrente
-              currentDrawdown = Math.min(currentDrawdown + reward, 0);
-            
-              // Aggiorna il massimo drawdown se necessario
-              maxDrawdown = Math.min(maxDrawdown, currentDrawdown);
-            
-              return total + reward;
-            }, 0);        
-            // Il massimo drawdown finale sarà la somma della serie più lunga di reward negativi
-            const totalDrawdown = maxDrawdown;       
-            return {
-              month,
-              totalReward,
-              totalDrawdown,
-            };
-          });  
+       const monthlyTotals = Object.entries(tradesByMonth).map(([month, trades]) => ({
+        month,
+        totalReward: trades.reduce((total, trade) => total + parseInt(trade.reward, 10), 0),
+        totalDrawdown: trades.reduce((maxDrawdown, trade) => {
+          const reward = parseInt(trade.reward, 10);
+          const currentDrawdown = Math.min(maxDrawdown + reward, 0);
+          return Math.min(maxDrawdown, currentDrawdown);
+        }, 0),
+      }));
+       
              // Ordina l'array in base alla data
              monthlyTotals.sort((a, b) => {
                // Confronto delle stringhe delle date nel formato "YYYY/MM"
