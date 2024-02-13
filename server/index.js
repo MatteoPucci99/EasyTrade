@@ -16,7 +16,7 @@ app.use("/singletrade", singleTradeRoutes);
 const CONNECTION_URL =
   "mongodb+srv://matteopucci:matteopucci123@cluster0.it13zn0.mongodb.net/?retryWrites=true&w=majority";
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
 
 mongoose
   .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })

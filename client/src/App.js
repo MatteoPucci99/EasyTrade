@@ -13,9 +13,9 @@ import { getTradesByIdAction } from "./redux/actions/singletrade";
 import Statistics from "./components/Statistics/Statistics";
 import History from "./components/History";
 import Objectives from "./components/Objectives/Objectives";
-import NavBarWidget from "./components/NavBarWidget";
 import Login from "./components/Login";
 import { IoMenuOutline } from "react-icons/io5";
+import WidgetTW from "./components/WidgetTW";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,12 +45,12 @@ function App() {
     <BrowserRouter>
       <Container
         fluid
-        className="darkthemeBg pb-5"
+        className="darkthemeBg pb-5 posCont"
         style={{ minHeight: "100vh" }}
       >
-        <NavBarWidget />
+        <WidgetTW />
         {isLoggedIn ? (
-          <Row className="ms-1">
+          <Row className="ms-1 posRow">
             <Col
               className={`${
                 showSidebar ? "onCanvas" : "d-none d-lg-block col-lg-2"

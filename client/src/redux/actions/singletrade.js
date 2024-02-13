@@ -1,4 +1,4 @@
-export const API = "http://localhost:5000/singletrade";
+export const API = "http://localhost:3001/singletrade";
 export const CREATE_TRADE = "CREATE_TRADE";
 export const GET_TRADES = "GET_TRADES";
 export const UPDATE_TRADE = "UPDATE_TRADE";

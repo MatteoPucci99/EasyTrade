@@ -1,4 +1,4 @@
-export const API = "http://localhost:5000/strategies";
+export const API = "http://localhost:3001/strategies";
 export const SET_STRATEGY = "SET_STRATEGY";
 export const GET_STRATEGY = "GET_STRATEGY";
 export const UPDATE_STRATEGY = "UPDATE_STRATEGY";
