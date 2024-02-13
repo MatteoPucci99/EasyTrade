@@ -9,9 +9,9 @@ import itLocale from '@fullcalendar/core/locales/it';
 import MonthlyProgressBar from "./MonthlyProgressBar";
 import { useDispatch, useSelector} from "react-redux";
 import { format } from "date-fns";
-import { createTradeAction, removeTradeAction, updateTradeAction } from "../redux/actions/singletrade";
-import SuccessAlert from "./SuccessAlert";
-import DeleteAlert from "./DeleteAlert";
+import { createTradeAction, removeTradeAction, updateTradeAction } from "../../redux/actions/singletrade";
+import SuccessAlert from "../Alert/SuccessAlert";
+import DeleteAlert from "../Alert/DeleteAlert";
 import { motion } from "framer-motion";
 
 

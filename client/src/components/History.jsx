@@ -6,8 +6,8 @@ import { RiPencilFill } from "react-icons/ri";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
 import { removeTradeAction, updateTradeAction } from "../redux/actions/singletrade";
-import SuccessAlert from "./SuccessAlert";
-import DeleteAlert from "./DeleteAlert";
+import SuccessAlert from "./Alert/SuccessAlert";
+import DeleteAlert from "./Alert/DeleteAlert";
 import { motion } from "framer-motion";
 
 const History = (props)=>{

@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import "./App.css";
-import CreateStrategy from "./components/CreateStrategy";
+import CreateStrategy from "./components/Strategy/CreateStrategy";
 import "bootstrap/dist/css/bootstrap.min.css";
-import MyStrategies from "./components/MyStrategies";
+import MyStrategies from "./components/Strategy/MyStrategies";
 import { Col, Container, Row } from "react-bootstrap";
 import SideBar from "./components/SideBar";
 import { getStrategyAction } from "./redux/actions/strategy";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import Trading from "./components/Trading";
+import Trading from "./components/Trading/Trading";
 import { getTradesByIdAction } from "./redux/actions/singletrade";
 import Statistics from "./components/Statistics/Statistics";
 import History from "./components/History";

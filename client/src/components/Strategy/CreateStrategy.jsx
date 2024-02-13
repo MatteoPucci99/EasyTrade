@@ -5,11 +5,11 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeStrategyAction, setStrategyAction, updateStrategyAction } from '../redux/actions/strategy'
+import { removeStrategyAction, setStrategyAction, updateStrategyAction } from '../../redux/actions/strategy'
 import {  useNavigate, useParams } from 'react-router-dom'
 import { TiDelete } from "react-icons/ti";
-import SuccessAlert from './SuccessAlert';
-import DeleteAlert from './DeleteAlert';
+import SuccessAlert from '../Alert/SuccessAlert';
+import DeleteAlert from '../Alert/DeleteAlert';
 import { motion } from "framer-motion";
 
 const CreateStrategy = ()=>{
