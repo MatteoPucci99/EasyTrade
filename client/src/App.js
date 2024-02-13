@@ -24,7 +24,6 @@ function App() {
   }, []);
 
   const [strategyData, setStrategyData] = useState(null);
-  const [showModal, setShowModal] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   useEffect(() => {
@@ -68,16 +67,6 @@ function App() {
               <div className="hamburger-icon" onClick={toggleSidebar}>
                 <IoMenuOutline style={{ color: "white" }} />
               </div>
-
-              {/* Sidebar oncanvas 
-              {showSidebar && (
-                <div className="sidebar-oncanvas">
-                  <SideBar
-                    getData={getStrategyData}
-                    handleLogin={handleLogin}
-                  />
-                </div>
-              )}*/}
 
               {/* Sfondo trasparente sopra il contenuto principale quando la sidebar è aperta */}
               {showSidebar && (
