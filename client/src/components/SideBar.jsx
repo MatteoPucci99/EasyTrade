@@ -84,6 +84,8 @@ const SideBar = (props)=>{
                  <Dropdown.Menu>
                   {strategies.filter(strategy=>strategy.params.name !== strategySelected).map((el,index)=>{
                     return(
+                      //Attraverso props.getData(el) recupero tutti i dati della strategia selezionata nel dropdown e li passo a App.js che distruibuirà
+                      //i dati ai vari componenti. 
                       <Dropdown.Item  onClick={()=>{setStrategySelected(el.params.name); props.getData(el)}} key={index}>{el.params.name}</Dropdown.Item>
                     )
                   })}

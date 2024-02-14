@@ -19,20 +19,26 @@ import WidgetTW from "./components/WidgetTW";
 
 function App() {
   const dispatch = useDispatch();
+  //Al montaggio del componente App faccio il dispatch di getStrategyAction per rendere disponibile all'applicazione tutti i dati delle strategie
   useEffect(() => {
     dispatch(getStrategyAction());
   }, []);
-
+  //Stato per raccogliere tutti i dati relativi a una strategia.
   const [strategyData, setStrategyData] = useState(null);
+  //Stato che viene gestito da handleLogin che verrà passata come prop al componente Login
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
+
+  //In base alla strategia che viene selezionata si ottengono tutti i trade di quella strategia.
   useEffect(() => {
     if (strategyData) {
       dispatch(getTradesByIdAction(strategyData._id));
     }
   }, [strategyData]);
 
+  //Funzione passata come prop al componente Login per gestire l'accesso all'applicazione
   const handleLogin = (input) => setIsLoggedIn(input);
+  //Funzione che viene passata come prop al componente SideBar. La descrizione della funzione si trova nel componente SideBar
   const getStrategyData = (data) => setStrategyData(data);
   const canAccessRoutes = strategyData !== null;
 
