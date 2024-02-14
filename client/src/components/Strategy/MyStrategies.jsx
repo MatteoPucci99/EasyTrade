@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 const MyStrategies = ()=>{
     const navigate = useNavigate()
    
-   
+   //Recupero le informazioni sulle strategie e le passo come prop a SingleStrategy
     const strategies = useSelector(state=>state.strategy.content)
     
     const [search,setSearch] = useState('')
@@ -40,6 +40,7 @@ const MyStrategies = ()=>{
                 {/*La condizione di filtro è data dalla funzione che verifica se il nome è convertito in minuscolo ed include la stringa di "search" */}
                 {strategies.length > 0 ? (strategies.filter((s)=>s.params.name.toLowerCase().includes(search)).map((strategy,index) => (
                     <Col key={index} xs={12} lg={4}md={6}  className="darkthemeBgHover rounded-4 p-3 me-2 mt-3 boxshadow width">
+                        {/*Passo l'id al url della strategia cosi da poterla recuperare nel componente CreateStrategy con lo useParams */}
                         <Link to={`/createstrategy/${strategy._id}`} className="text-decoration-none darkthemeText">
                             <SingleStrategy singleStrategy={strategy} key={strategy._id} />
                         </Link>

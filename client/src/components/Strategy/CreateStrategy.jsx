@@ -17,9 +17,13 @@ const CreateStrategy = ()=>{
   const [showAlert, setShowAlert] = useState(false);
   const [deleteAlert, setDeleteAlert] = useState(false)
     const navigate = useNavigate()
+
+    //Recupero l'id della SingleStrategy che ho passato nel map di MyStrategies
     const  { id } = useParams()
+
     const strategies = useSelector(state=> state.strategy.content)
     const dispatch = useDispatch()
+   
     const [data, setData] = useState({
       params : {
         name: '',
@@ -39,8 +43,8 @@ const CreateStrategy = ()=>{
       statistics: []
     })
 
-    const isValidData = () => {
-      
+    //Funzione per verificare che gli input siano compilati correttamente e che l'utente erroneamente non lasci spazi vuoti
+    const isValidData = () => {    
       if (
         data.params.name.trim() === '' ||
         data.params.risk.trim() === '' ||
@@ -49,15 +53,15 @@ const CreateStrategy = ()=>{
         data.targets.month.dd.trim() === '' ||
         data.targets.quarter.profit.trim() === '' ||
         data.targets.quarter.dd.trim() === ''
-      ) {
-       
+      ) {   
         return false;
-      }
-       
+      }      
       return true;
     };
-
+    //Creo lo stato per gestire l'input in cui vengono stabiliti i pair
     const [currentPair, setCurrentPair] = useState('')
+
+    //Funzione per aggiungere un pair alla lista che viene chiamata da handleKeyPress una volta che viene premuto il tasto "invio"
     const addPair = (e)=>{
       e.preventDefault();
       if(currentPair.trim() !== ''){
@@ -68,53 +72,43 @@ const CreateStrategy = ()=>{
       }
       setCurrentPair('')
     }
-
     const handleKeyPress = (e)=>{
       if(e.key === 'Enter'){
         addPair(e)
       }
     }
-    
+    //Funzione per gestire il componente DeleteAlert che viene chiamato dopo la conferma di eliminazione della strategia.
+    //Dopo un secondo l'alert scompare
     const handleDeleteAlert = (input)=>{
-      setDeleteAlert(input);
- 
-
-      
+      setDeleteAlert(input);    
       setTimeout(() => {
         setDeleteAlert(!input);      
-        
-
       }, 1000);
     }
 
- 
+    //Funzione per gestire il componente SuccessAlert che viene chiamato dopo la conferma di creazione della strategia.
+    //Dopo un secondo l'alert scompare
     const handleAlert = (input)=>{
       setShowAlert(input);
- 
-
-    
       setTimeout(() => {
         setShowAlert(!input);      
-        
-
       }, 1000);
     }
 
-
+    //Invio dei dati al server
     const handleSubmit = (e)=>{
       e.preventDefault();
-
+      //Se i dati non sono stati compilati correttameente chiama l'alert
       if(!isValidData()){
         alert('Compila tutti i campi richiesti');
         return;
       }
+      //Se c'è l'id (quindi siamo nel caso di modifica di strategia) fai l'udpate
       if(id){
         dispatch(updateStrategyAction(data, handleAlert))
-        
-      } else {
-        
+      //Contesto di creazione della strategia --> crea una nuova strategia
+      } else {      
         dispatch(setStrategyAction(data, handleAlert))
-
         setData({
           params : {
             name: '',
@@ -133,11 +127,10 @@ const CreateStrategy = ()=>{
           },
           statistics: []
         })
-
-      }
-      
+      }    
     }
-
+    //Se viene intercettato un id e strategies non è vuoto, viene cercata la strategia con l'id corrispondente e impostato lo stato Data con i dati recuperati
+    //Così nella fase di update l'intero form è già compilato con i dati della strategia selezionata
     useEffect(()=>{
       if(id && strategies.length > 0){
         const selectedStrategy = strategies.find(strategy=> strategy._id === id)
@@ -146,7 +139,7 @@ const CreateStrategy = ()=>{
         }
       }
     }, [id,strategies])
-
+    //Funzione per rimuovere dalla lista il pair desiderato. Filter crea un nuovo array che contiene tutti gli elementi tranne quello selezionato. 
     const removePair = (indexToRemove)=>{
       setData(prevData => ({
         ...prevData,
@@ -157,6 +150,7 @@ const CreateStrategy = ()=>{
       }));
     }
 
+    //Funzione per eliminare una strategia
     const deleteStrategy = ()=>{
       dispatch(removeStrategyAction(data, handleDeleteAlert))
       setData({
@@ -184,7 +178,7 @@ const CreateStrategy = ()=>{
 
       }, 1200);
     }
-
+    //Funzione per gestire l'apparizione del modale per eliminare una strategia.
     const handleDeleteModal = ()=>{
       setShowDelete(true)
     }
@@ -224,7 +218,8 @@ const CreateStrategy = ()=>{
 
                 </div>
                 <div className="my-4 input-container">
-                  <input type="text" placeholder=' ' value={data.params.risk}  onChange={(e)=>{  if (!/^\d*\.?\d*$/.test(e.target.value)) {     return; } setData({...data, params:{...data.params, risk: e.target.value}})}}/>
+                  {/* Nel onChange viene verificato che nel campo venga inserito un numero decimale */}
+                  <input type="text" placeholder=' ' value={data.params.risk} onChange={(e)=>{  if (!/^\d*\.?\d*$/.test(e.target.value)) {return;} setData({...data, params:{...data.params, risk: e.target.value}})}}/>
                 <label>Risk di default %</label>
 
                 </div>
@@ -290,6 +285,7 @@ const CreateStrategy = ()=>{
 
         </Row>
       </form> 
+      {/*Se l'id è presente, quindi siamo in contesto di modifica appare l'alert di modifica, sennò l'alert di creazione strategia. */}
       {showAlert && <SuccessAlert message={id?'Strategia modificata con successo' : 'Strategia creata con successo'}/>}
       {deleteAlert && <DeleteAlert deleteMessage={'Strategia rimossa con successo'}/>}
         
