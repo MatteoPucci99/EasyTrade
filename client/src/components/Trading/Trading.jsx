@@ -18,177 +18,158 @@ import { motion } from "framer-motion";
 
 
 const Trading = (props) => {
-    const [pairSelected, setPairSelected] = useState()
-    const [isClickedEvent, setIsClickedEvent] = useState(false)
-    const [showModal,setShowModal] = useState(false)
-    const [showDelete, setShowDelete] = useState(false)
-    const [selectedDate, setSelectedDate] = useState(null);
-    const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
-    const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
-    const [selectedButton, setSelectedButton] = useState('Compra')
-    const [showAlert, setShowAlert] = useState(false);
-    const [deleteAlert, setDeleteAlert] = useState(false)
+  const [pairSelected, setPairSelected] = useState()
+  const [isClickedEvent, setIsClickedEvent] = useState(false)
+  const [showModal,setShowModal] = useState(false)
+  const [showDelete, setShowDelete] = useState(false)
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
+  const [selectedButton, setSelectedButton] = useState('Compra')
+  const [showAlert, setShowAlert] = useState(false);
+  const [deleteAlert, setDeleteAlert] = useState(false)
+  //Funzione per gestire il componente DeleteAlert che viene chiamato dopo l'eliminazione di un trade.
+  //Dopo un secondo l'alert scompare
+  const handleDeleteAlert = (input)=>{
+    setDeleteAlert(input);   
+    setTimeout(() => {
+      setDeleteAlert(!input);             
+    }, 1000);
+  }
+  //Funzione per gestire il componente SuccessAlert che viene chiamato dopo la creazione di un trade.
+  //Dopo un secondo l'alert scompare
+  const handleAlert = (input)=>{
+    setShowAlert(input);
+    setTimeout(() => {
+      setShowAlert(!input);      
+    }, 1000);
+  }
+  const trades = useSelector(state=>state.trades.content)
+  const dispatch = useDispatch()
+  //Funzione per gestire il click su una data del calendario
+  //Vengono recuperate le informazioni sulla data e viene aperto il modale per creare un trade
+  const handleDateClick = (info) => {
+    const dateOfTheBox = new Date(info.date)
+    const formattedData = format(dateOfTheBox, 'yyyy-MM-dd') 
+    setSelectedDate(formattedData)
+    setShowModal(true); 
+  };
 
-    const handleDeleteAlert = (input)=>{
-      setDeleteAlert(input);
-      
-      setTimeout(() => {
-        setDeleteAlert(!input);             
-      }, 1000);
-    }
-
- 
-    const handleAlert = (input)=>{
-      setShowAlert(input);
-
-      setTimeout(() => {
-        setShowAlert(!input);      
-      }, 1000);
-    }
-
-    const trades = useSelector(state=>state.trades.content)
-    const dispatch = useDispatch()
-
-    const handleDateClick = (info) => {
-      const dateOfTheBox = new Date(info.date)
-      const formattedData = format(dateOfTheBox, 'yyyy-MM-dd') 
-      setSelectedDate(formattedData)
-      setShowModal(true);
-
-       
-        
-      };
-
-      const calendarRef = useRef(null);
-
-      const handleCalendarRef = (calendar) => {
-        calendarRef.current = calendar;
-      };
-      useEffect(() => {
-        const handleDatesSet = (arg) => {
-          const newMonth = arg.view.currentStart.getMonth() + 1;
-          const newYear = arg.view.currentStart.getFullYear();
-          setCurrentMonth(newMonth);
-          setCurrentYear(newYear)
-        };
-      
-        const calendarApi = calendarRef.current?.getApi();
-      
-        if (calendarApi) {
-          calendarApi.on("datesSet", handleDatesSet);
-        }
-      
-        return () => {
-          if (calendarApi) {
-            calendarApi.off("datesSet", handleDatesSet);
-          }
-        };
-      }, [setCurrentMonth]);
-      const currentEvents = trades.filter((trade) => {
-        const eventDate = new Date(trade.date);
-        const eventMonth = eventDate.getMonth() + 1;
-        const eventYear = eventDate.getFullYear();
-        return eventMonth === currentMonth && eventYear === currentYear;
-      });
-      
-      currentEvents.sort((a, b) => {
-        const dateA = new Date(a.date);
-        const dateB = new Date(b.date);
-        
-        return dateA - dateB;
-    });
-    
-      
-      
-      const totalProfit = currentEvents.reduce(
-        (acc, trade) => acc + parseInt(trade.reward, 10),
-        0
-      );
-     
-      const calculateMaxDrawdown = (trades) => {
-        let maxDrawdown = 0;
-        let currentDrawdown = 0;
-    
-        const totalDrawdown = trades.reduce((total, trade) => {
-            const reward = parseInt(trade.reward, 10);
-    
-            if (!isNaN(reward)) {
-                currentDrawdown = Math.min(currentDrawdown + reward, 0);
-                maxDrawdown = Math.min(maxDrawdown, currentDrawdown);
-            } else {
-                console.error(`Errore: Impossibile convertire ${trade.reward} in un numero.`);
-            }
-    
-            return total;
-        }, 0);
-    
-        return Math.abs(maxDrawdown);
+  const calendarRef = useRef(null);
+  const handleCalendarRef = (calendar) => {
+    calendarRef.current = calendar;
+  };
+  useEffect(() => {
+    const handleDatesSet = (arg) => {
+      const newMonth = arg.view.currentStart.getMonth() + 1;
+      const newYear = arg.view.currentStart.getFullYear();
+      setCurrentMonth(newMonth);
+      setCurrentYear(newYear)
     };
+  
+    const calendarApi = calendarRef.current?.getApi();
+  
+    if (calendarApi) {
+      calendarApi.on("datesSet", handleDatesSet);
+    }
+  
+    return () => {
+      if (calendarApi) {
+        calendarApi.off("datesSet", handleDatesSet);
+      }
+    };
+  }, [setCurrentMonth]);
+  
+  const currentEvents = trades.filter((trade) => {
+    const eventDate = new Date(trade.date);
+    const eventMonth = eventDate.getMonth() + 1;
+    const eventYear = eventDate.getFullYear();
+    return eventMonth === currentMonth && eventYear === currentYear;
+  });
+  
+  currentEvents.sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
     
-    // Esempio di utilizzo:
-    const maxDrawdown = calculateMaxDrawdown(currentEvents);
-    console.log(maxDrawdown);
-      
-      
-      
-      
-        
-
-
-        const calendarEvents = trades.map(trade => ({
-          title: `(${trade.reward}%) ${trade.pair}`,
-          start: new Date(trade.date),
-          allDay: true,
-          type: trade.type,
-          strategyId: trade.strategyId,
-          result: trade.result,
-          risk: trade.risk,
-          reward: trade.reward,
-          pair: trade.pair,
-          _id: trade._id
-        }));
-
-        const eventContent = (arg) => {
-          if (!arg) {
-            return null;
-          }
-          
-          const result = arg.event.extendedProps.result;
-          const borderRadius = '3px'
-          let backgroundColor = 'gray';
-          if (result === 'Stop Loss') {
-            backgroundColor = 'rgb(185,82,79)';
-          } else if (result === 'Take Profit') {
-            backgroundColor = 'rgb(94,161,59';
-          }
-        
-          return (
-            <div style={{ backgroundColor, borderRadius, height:'30px', cursor:'pointer' }} className="d-flex align-items-center fw-bold justify-content-between text-truncate">
-              {arg.event.title.toUpperCase()}
-              <div className="deleteIcon d-flex justify-content-center align-items-center" style={{ borderRadius: '50%', height: '25px', width: '25px' }}>
-              <RxCross2 style={{fontSize: '1.1em'}} onClick={()=>showDeleteModal(arg.event)}/>
-              </div>
-            </div>
-          );
-        };
-        
-        
-   
-        const [typeStatus, setTypeStatus] = useState()
-        const tradeType = ['Take Profit', 'Stop Loss', 'Break Even']
+    return dateA - dateB;
+  });
      
-      
+  const totalProfit = currentEvents.reduce(
+    (acc, trade) => acc + parseInt(trade.reward, 10),
+    0
+  );
+   
+  const calculateMaxDrawdown = (trades) => {
+    let maxDrawdown = 0;
+    let currentDrawdown = 0;
+
+    const totalDrawdown = trades.reduce((total, trade) => {
+      const reward = parseInt(trade.reward, 10);
+
+      if (!isNaN(reward)) {
+          currentDrawdown = Math.min(currentDrawdown + reward, 0);
+          maxDrawdown = Math.min(maxDrawdown, currentDrawdown);
+      } else {
+          console.error(`Errore: Impossibile convertire ${trade.reward} in un numero.`);
+      }
+
+      return total;
+    }, 0);
+
+    return Math.abs(maxDrawdown);
+  };
+  
+  // Esempio di utilizzo:
+  const maxDrawdown = calculateMaxDrawdown(currentEvents);
+  console.log(maxDrawdown);
     
-    const handleCloseModal = ()=>{
-        setShowModal(false)
-        setPairSelected()
-        setTypeStatus()
-        setSelectedButton('Compra')        
-        setIsClickedEvent(false)
+      
+  const calendarEvents = trades.map(trade => ({
+    title: `(${trade.reward}%) ${trade.pair}`,
+    start: new Date(trade.date),
+    allDay: true,
+    type: trade.type,
+    strategyId: trade.strategyId,
+    result: trade.result,
+    risk: trade.risk,
+    reward: trade.reward,
+    pair: trade.pair,
+    _id: trade._id
+  }))
 
-    } 
-
-      const [sendData, setSendData] = useState(null);
+  const eventContent = (arg) => {
+    if (!arg) {
+      return null;
+    }     
+    const result = arg.event.extendedProps.result;
+    const borderRadius = '3px'
+    let backgroundColor = 'gray';
+    if (result === 'Stop Loss') {
+      backgroundColor = 'rgb(185,82,79)';
+    } else if (result === 'Take Profit') {
+      backgroundColor = 'rgb(94,161,59';
+    }
+    return (
+      <div style={{ backgroundColor, borderRadius, height:'30px', cursor:'pointer' }} className="d-flex align-items-center fw-bold justify-content-between text-truncate">
+        {arg.event.title.toUpperCase()}
+        <div className="deleteIcon d-flex justify-content-center align-items-center" style={{ borderRadius: '50%', height: '25px', width: '25px' }}>
+        <RxCross2 style={{fontSize: '1.1em'}} onClick={()=>showDeleteModal(arg.event)}/>
+        </div>
+      </div>
+    );
+  };
+      
+  const [typeStatus, setTypeStatus] = useState()
+  const tradeType = ['Take Profit', 'Stop Loss', 'Break Even']
+    
+  const handleCloseModal = ()=>{
+      setShowModal(false)
+      setPairSelected()
+      setTypeStatus()
+      setSelectedButton('Compra')        
+      setIsClickedEvent(false)
+  } 
+    const [sendData, setSendData] = useState(null);
 
   useEffect(() => {
     if (props.singleStrategy) {
@@ -212,7 +193,6 @@ const Trading = (props) => {
         return false;
       }
     }
-  
     // Se tutte le condizioni sono soddisfatte, restituisci true
     return true;
   };
@@ -254,10 +234,10 @@ const Trading = (props) => {
       reward: trade.reward,
       date: formattedDate,
       _id: trade._id
-     })
-     
+     })   
   }
-
+  //Funzione per gestire il click sul evento di una data del calendario
+  //Vengono recuperate le informazioni del evento trade e viene settato lo stato con i dati del evento trade appena clickato.
   const handleEventClick = (info)=>{
     const clickedEvent = info.event
     const eventDate = clickedEvent.start;
@@ -276,9 +256,8 @@ const Trading = (props) => {
     date: formattedDate,
     _id: trade._id
    })
-   
   }
-  // setShowAlert(false)
+  
   useEffect(() => {
     if (isClickedEvent) {
       setSelectedButton(sendData.type || 'Compra');
@@ -460,7 +439,7 @@ const Trading = (props) => {
         </Container>
 
         </Modal>
-        {showAlert && <SuccessAlert message={'Operazione avvenuta con successo'}/>}
+      {showAlert && <SuccessAlert message={'Operazione avvenuta con successo'}/>}
       {deleteAlert && <DeleteAlert deleteMessage={'Trade rimosso con successo'}/>}
     </Container>
     </motion.div>
