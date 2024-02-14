@@ -27,6 +27,7 @@ function App() {
   const [strategyData, setStrategyData] = useState(null);
   //Stato che viene gestito da handleLogin che verrà passata come prop al componente Login
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  //Stato per l'apparizione della sidebar per dispositivi mobile, che viene gestito dalla funzione toggleSidebar
   const [showSidebar, setShowSidebar] = useState(false);
 
   //In base alla strategia che viene selezionata si ottengono tutti i trade di quella strategia.
@@ -40,10 +41,11 @@ function App() {
   const handleLogin = (input) => setIsLoggedIn(input);
   //Funzione che viene passata come prop al componente SideBar. La descrizione della funzione si trova nel componente SideBar
   const getStrategyData = (data) => setStrategyData(data);
+  //canAccessRoutes viene utilizzato per impedire la navigazione in caso in cui non viene selezionata una strategia, perciò strategyData è null.
   const canAccessRoutes = strategyData !== null;
-
+  //Funzione per gestire l'apparizione della Sidebar per dispositivi mobile.
   const toggleSidebar = () => setShowSidebar((prev) => !prev);
-
+  //Funzione per chiudere la Sidebar nel momento in cui si clicca un punto a caso del div overlay
   const closeSidebar = () => setShowSidebar(false);
 
   return (
@@ -74,7 +76,7 @@ function App() {
                 <IoMenuOutline style={{ color: "white" }} />
               </div>
 
-              {/* Sfondo trasparente sopra il contenuto principale quando la sidebar è aperta */}
+              {/* Sfondo trasparente sopra il contenuto principale quando la sidebar è aperta (la sidebar ha uno z-index superiore rispetto al div overlay)*/}
               {showSidebar && (
                 <div className="overlay" onClick={closeSidebar}></div>
               )}
