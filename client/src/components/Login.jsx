@@ -8,14 +8,17 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
+  //Funzione per gestire la visualizzazione della password
+  //In base allo stato (true o false) attraverso un condiizonale l'input sarà di type text o password, quindi mostrando o nascondendo la PW
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleLogin = (e) => {
     e.preventDefault()
-    // Simulazione di un processo di autenticazione lato client
-    if (username === 'matteopucci99' && password === 'matteopucciEasytrade99') {      
+    // Simulazione di un processo di autenticazione lato client molto semplice
+    if (username === 'matteopucci99' && password === 'matteopucciEasytrade99') {   
+      //Funzione passata da App per gestire lo stato isLoggedIn e permettere la navigazione nell'applicazione   
       props.handleLogin(true)
     } else {
       alert('Credenziali non valide');
@@ -41,6 +44,7 @@ const Login = (props) => {
             </div>
             <div className="my-4 input-container" style={{ width: '70%' }}>
               <input
+                //Mostro o nascondo la password in base a showPassword
                 type={showPassword ? 'text' : 'password'}
                 placeholder=' '
                 value={password}
