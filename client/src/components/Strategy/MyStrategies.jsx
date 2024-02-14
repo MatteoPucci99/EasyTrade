@@ -13,8 +13,10 @@ const MyStrategies = ()=>{
    
    
     const strategies = useSelector(state=>state.strategy.content)
-    console.log(strategies)
+    
     const [search,setSearch] = useState('')
+    //Funzione da passare come prop al componente StrategyFilter per gestire lo stato search
+    //search verrà utilizzato come filtro della srtrategia ricercata
     const handleSearch = (search)=>setSearch(search)
    
 
@@ -35,6 +37,7 @@ const MyStrategies = ()=>{
                 </Col>
             </Row>
             <Row className="mt-3 ">
+                {/*La condizione di filtro è data dalla funzione che verifica se il nome è convertito in minuscolo ed include la stringa di "search" */}
                 {strategies.length > 0 ? (strategies.filter((s)=>s.params.name.toLowerCase().includes(search)).map((strategy,index) => (
                     <Col key={index} xs={12} lg={4}md={6}  className="darkthemeBgHover rounded-4 p-3 me-2 mt-3 boxshadow width">
                         <Link to={`/createstrategy/${strategy._id}`} className="text-decoration-none darkthemeText">
