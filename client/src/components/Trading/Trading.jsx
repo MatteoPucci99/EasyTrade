@@ -53,8 +53,23 @@ const Trading = (props) => {
     const dateOfTheBox = new Date(info.date)
     const formattedData = format(dateOfTheBox, 'yyyy-MM-dd') 
     setSelectedDate(formattedData)
+    updateData(formattedData)
     setShowModal(true); 
   };
+  //Funzione per settare lo stato quando si clicca su una data del calendario
+  //Settando id e risk recuperati della strategy e la data della deta clickata
+  const updateData = (date) =>{
+    setSendData({
+      strategyId: props.singleStrategy._id,
+      type: 'Compra',
+      pair: '',
+      result: '',
+      risk: props.singleStrategy.params.risk,
+      reward: '',
+      date: date,
+    });
+  }
+
 
   const calendarRef = useRef(null);
   const handleCalendarRef = (calendar) => {
@@ -125,7 +140,7 @@ const Trading = (props) => {
   const maxDrawdown = calculateMaxDrawdown(currentEvents);
   console.log(maxDrawdown);
     
-  //costruisco il mio array di oggetti trade da passare ad "events" del fullCalendar.
+  //Costruisco il mio array di oggetti trade da passare ad "events" del fullCalendar.
   const calendarEvents = trades.map(trade => ({
     title: `(${trade.reward}%) ${trade.pair}`,
     start: new Date(trade.date),
@@ -158,6 +173,7 @@ const Trading = (props) => {
       <div style={{ backgroundColor, borderRadius, height:'30px', cursor:'pointer' }} className="d-flex align-items-center fw-bold justify-content-between text-truncate">
         {arg.event.title.toUpperCase()}
         <div className="deleteIcon d-flex justify-content-center align-items-center" style={{ borderRadius: '50%', height: '25px', width: '25px' }}>
+          {/* Clickando sul icone del delete si passano le informazioni al deleteModal che setterà lo stato in base alle informazioni del trade ricevute al momento del click */}
         <RxCross2 style={{fontSize: '1.1em'}} onClick={()=>showDeleteModal(arg.event)}/>
         </div>
       </div>
@@ -176,7 +192,7 @@ const Trading = (props) => {
   } 
     const [sendData, setSendData] = useState(null);
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (props.singleStrategy) {
       setSendData({
         strategyId: props.singleStrategy._id,
@@ -188,7 +204,8 @@ const Trading = (props) => {
         date: selectedDate,
       });
     }
-  }, [props.singleStrategy, selectedDate]);
+  }, [props.singleStrategy, selectedDate]);*/
+
   //Funzione per verificare che gli input siano compilati correttamente e che l'utente erroneamente non lasci spazi vuoti
   const isValidData = () => {
     // Verifica che ogni proprietà richiesta sia compilata
@@ -202,7 +219,8 @@ const Trading = (props) => {
     return true;
   };
 
-  //Funzione per inviare i dati del trade al server. Se si clicka su un evento trade verrà dispatchata la modifica sennò la creazione.
+  //Funzione per inviare i dati del trade al server. 
+  //Se si clicka su un evento trade verrà dispatchata la modifica sennò la creazione.
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (!isValidData()) {
@@ -219,16 +237,19 @@ const Trading = (props) => {
     handleCloseModal(); 
   };
 
+  //Funzione per eliminare il trade selezionato.
   const deleteEvent = ()=>{
     dispatch(removeTradeAction(sendData, handleDeleteAlert))
   }
   const hideDeleteModal = ()=>{
     setShowDelete(false)
   }
+  //showDeleteModal riceve come parametro le informazioni sul trade appena clickato dal rendering degli eventi di eventContent, che passa arg.event al onClick del icona RxCross2
   const showDeleteModal = (event)=>{
     setShowDelete(true)
     const eventDate = event.start
     const formattedDate = format(eventDate, 'yyyy-MM-dd');
+    //event.extendedProps sono le proprietà del oggetto event
     const trade = event.extendedProps
     setSendData({
       strategyId: trade.strategyId,
