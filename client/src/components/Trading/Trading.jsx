@@ -46,6 +46,7 @@ const Trading = (props) => {
   }
   const trades = useSelector(state=>state.trades.content)
   const dispatch = useDispatch()
+
   //Funzione per gestire il click su una data del calendario
   //Vengono recuperate le informazioni sulla data e viene aperto il modale per creare un trade
   const handleDateClick = (info) => {
@@ -59,6 +60,7 @@ const Trading = (props) => {
   const handleCalendarRef = (calendar) => {
     calendarRef.current = calendar;
   };
+
   useEffect(() => {
     const handleDatesSet = (arg) => {
       const newMonth = arg.view.currentStart.getMonth() + 1;
@@ -123,7 +125,7 @@ const Trading = (props) => {
   const maxDrawdown = calculateMaxDrawdown(currentEvents);
   console.log(maxDrawdown);
     
-      
+  //costruisco il mio array di oggetti trade da passare ad "events" del fullCalendar.
   const calendarEvents = trades.map(trade => ({
     title: `(${trade.reward}%) ${trade.pair}`,
     start: new Date(trade.date),
@@ -137,10 +139,13 @@ const Trading = (props) => {
     _id: trade._id
   }))
 
+  //Funzione da passare ad eventContent del fullCalendar per renderizzare il contenuto nelle varie caselle.
   const eventContent = (arg) => {
+    //Verifico la validità del argomento passato.
     if (!arg) {
       return null;
-    }     
+    }
+    //Accedo alle proprietà dell'evento per determinate il tipo di trade e in base a quello setto lo stile.     
     const result = arg.event.extendedProps.result;
     const borderRadius = '3px'
     let backgroundColor = 'gray';
@@ -184,7 +189,7 @@ const Trading = (props) => {
       });
     }
   }, [props.singleStrategy, selectedDate]);
-
+  //Funzione per verificare che gli input siano compilati correttamente e che l'utente erroneamente non lasci spazi vuoti
   const isValidData = () => {
     // Verifica che ogni proprietà richiesta sia compilata
     for (const key in sendData) {
@@ -197,7 +202,7 @@ const Trading = (props) => {
     return true;
   };
 
-
+  //Funzione per inviare i dati del trade al server. Se si clicka su un evento trade verrà dispatchata la modifica sennò la creazione.
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (!isValidData()) {
