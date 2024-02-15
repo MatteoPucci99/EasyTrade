@@ -190,22 +190,19 @@ const Trading = (props) => {
       setSelectedButton('Compra')        
       setIsClickedEvent(false)
   } 
-    const [sendData, setSendData] = useState(null);
-
-  /*useEffect(() => {
-    if (props.singleStrategy) {
-      setSendData({
-        strategyId: props.singleStrategy._id,
-        type: 'Compra',
-        pair: '',
-        result: '',
-        risk: props.singleStrategy.params.risk,
-        reward: '',
-        date: selectedDate,
-      });
-    }
-  }, [props.singleStrategy, selectedDate]);*/
-
+    //Inizializzo l'oggetto da mandare al server
+    const [sendData, setSendData] = useState(
+      {
+        strategyId: "",
+        type: "",
+        pair: "",
+        result: "",
+        risk: "",
+        reward: "",
+        date: "",
+        _id: ""
+      }
+    );
   //Funzione per verificare che gli input siano compilati correttamente e che l'utente erroneamente non lasci spazi vuoti
   const isValidData = () => {
     // Verifica che ogni proprietà richiesta sia compilata
@@ -268,20 +265,20 @@ const Trading = (props) => {
     const clickedEvent = info.event
     const eventDate = clickedEvent.start;
     const formattedDate = format(eventDate, 'yyyy-MM-dd');
-   setIsClickedEvent(true)
-   setShowModal(true);
-   const trade = clickedEvent.extendedProps
-   console.log(trade)
-   setSendData({
-    strategyId: trade.strategyId,
-    type: trade.type,
-    pair: trade.pair,
-    result: trade.result,
-    risk: trade.risk,
-    reward: trade.reward,
-    date: formattedDate,
-    _id: trade._id
-   })
+    setIsClickedEvent(true)
+    setShowModal(true);
+    const trade = clickedEvent.extendedProps
+   
+    setSendData({
+     strategyId: trade.strategyId,
+     type: trade.type,
+     pair: trade.pair,
+     result: trade.result,
+     risk: trade.risk,
+     reward: trade.reward,
+     date: formattedDate,
+     _id: trade._id
+    })
   }
   
   useEffect(() => {
@@ -435,10 +432,8 @@ const Trading = (props) => {
                      <div className="d-flex justify-content-center ">
                         <div style={{width:'80%'}} className="input-container mt-3">
                            <div >
-                              {isClickedEvent ? (  <input type="date"  value={sendData.date ? sendData.date : ''}/>) :( <input type="date" placeholder=" "  value={selectedDate ? selectedDate : ''}/>)}
+                              {<input type="date"  value={sendData.date || ''}/>}
                               <label>Data</label>
-
-
                            </div>
                         </div>
                      </div>
