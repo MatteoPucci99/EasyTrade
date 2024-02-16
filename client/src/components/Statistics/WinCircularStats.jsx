@@ -6,12 +6,11 @@ import { useSelector } from "react-redux";
 const WinCircularStats = () => {
 
   const trades = useSelector(state=>state.trades.content)
+  //Filtro i trade in base al result "Take Profit"
   const takeProfitTrades = trades.filter(trade => trade.result === 'Take Profit');
- 
+  //Calcolo percentuale di trade vincenti
   const winRate = (takeProfitTrades.length / trades.length * 100).toFixed(2)
  
-
-
   const [dati, setDati] = useState();
 
   useEffect(()=>{

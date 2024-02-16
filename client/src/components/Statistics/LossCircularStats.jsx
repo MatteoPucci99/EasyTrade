@@ -7,8 +7,9 @@ import { useSelector } from "react-redux"
 const LossCircularStats = ()=>{
 
   const trades = useSelector(state=>state.trades.content)
+  //Filtro i trade in base al result "Stop Loss" e "Break Even"
   const stopLossTrades = trades.filter(trade => trade.result === 'Stop Loss' || trade.result === 'Break Even');
-
+  //Calcolo la percentuale dei trade perdenti (vengono considerati perdenti anche quelli chiusi in pari)
   const winRate = (stopLossTrades.length / trades.length * 100).toFixed(2)
  
 

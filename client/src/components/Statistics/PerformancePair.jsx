@@ -13,31 +13,26 @@ const PerformancePair = (props)=>{
     const [tradeGroups, setTradeGroups] = useState([]);
   
     useEffect(() => {
-        const emptyTradeGroups = xData.map(() => []);
-        setTradeGroups(emptyTradeGroups);
-      }, []);
+      const updatedTradeGroups = trades.reduce((acc, trade) => {
+        //Creo la chiave "pair" con cui "cercare" la proprietà nel oggetto acc
+        const pairKey = trade.pair;
+        const rewardAsNumber = parseInt(trade.reward, 10); 
+        // Se la chiave pair non esiste ancora nell'oggetto acc, la inizializzo
+        if (!acc[pairKey]) {
+          acc[pairKey] = {
+            totalReward: 0
+          };
+        }    
+        // Calcolo il reward totale per quella coppia all'interno dell'oggetto 
+        acc[pairKey].totalReward += rewardAsNumber;   
+        return acc;
+      }, {});  
+      // Converto l'oggetto in un'arrray affinchè venga letto correttamente da ApexChart
+      const newTradeGroups = Object.values(updatedTradeGroups);   
+      // Aggiorno lo stato tradeGroups
+      setTradeGroups(newTradeGroups);
+    }, [trades]);
     
-      useEffect(() => {
-        setTradeGroups([]);
-      
-        trades.forEach((trade) => {
-          const index = xData.indexOf(trade.pair);
-          if (index !== -1) {
-            setTradeGroups((prevTradeGroups) => {
-              const newTradeGroups = [...prevTradeGroups];
-              if (!newTradeGroups[index]) {
-                newTradeGroups[index] = {
-                  totalReward: 0,
-                };
-              }
-      
-              const rewardAsNumber = parseInt(trade.reward, 10);
-              newTradeGroups[index].totalReward += rewardAsNumber;
-              return newTradeGroups;
-            });
-          }
-        });
-      }, [trades]);
 
     
     
