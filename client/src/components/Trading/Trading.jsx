@@ -274,8 +274,10 @@ const Trading = (props) => {
      date: formattedDate,
      _id: trade._id
     })
-    //Viene settato lo stato in base al tipo ti trade "Compra" o "Vendi"
+    //Vengono settati gli stati in base ai dati recuperati dal trade.
     setSelectedButton(sendData.type)
+    setPairSelected(sendData.pair)
+    setTypeStatus(sendData.result)
   }
 
   //In base al typeStatus viene settato il reward.
@@ -303,11 +305,6 @@ const Trading = (props) => {
     }
   };
   
-
-       
-
-   
-
   return (
     <motion.div
     initial={{ opacity: 0}}
