@@ -93,49 +93,45 @@ const Trading = (props) => {
       calendarApi.on("datesSet", handleDatesSet);
     }
   }, []);
-  
+
+  //Funzione per filtrare i trade in base al mese e all'anno che vengono visualizzati nel calendario (in ordine crescente)
+  //L'obiettivo è creare le variabili per il total profit e total drawdown del mese e anno correnti e passarli al componente MonthlyProgressBar
   const currentEvents = trades.filter((trade) => {
     const eventDate = new Date(trade.date);
     const eventMonth = eventDate.getMonth() + 1;
     const eventYear = eventDate.getFullYear();
     return eventMonth === currentMonth && eventYear === currentYear;
-  });
-  
-  currentEvents.sort((a, b) => {
+  }).sort((a, b) => {
     const dateA = new Date(a.date);
     const dateB = new Date(b.date);
     
     return dateA - dateB;
   });
-     
+
+  //Calcolo il totalProfit corrente
   const totalProfit = currentEvents.reduce(
     (acc, trade) => acc + parseInt(trade.reward, 10),
     0
   );
-   
+  //Calcolo il maxDrawdown corrente
   const calculateMaxDrawdown = (trades) => {
+    //Inizializzo maxDD e currentDD
     let maxDrawdown = 0;
     let currentDrawdown = 0;
 
     const totalDrawdown = trades.reduce((total, trade) => {
       const reward = parseInt(trade.reward, 10);
-
-      if (!isNaN(reward)) {
-          currentDrawdown = Math.min(currentDrawdown + reward, 0);
-          maxDrawdown = Math.min(maxDrawdown, currentDrawdown);
-      } else {
-          console.error(`Errore: Impossibile convertire ${trade.reward} in un numero.`);
-      }
-
+      //Con Math.min prendo il minimo tra currentDrawdown + reward e 0
+      currentDrawdown = Math.min(currentDrawdown + reward, 0);
+      //Mi assicuro che alla fine dell'iterazione maxDrawdown sia quello con DD più grande.
+      maxDrawdown = Math.min(maxDrawdown, currentDrawdown);
       return total;
     }, 0);
-
+    //Torno il valore assoluto perchè mi serve come valore positivo
     return Math.abs(maxDrawdown);
   };
-  
-  // Esempio di utilizzo:
-  const maxDrawdown = calculateMaxDrawdown(currentEvents);
-  console.log(maxDrawdown);
+   const maxDrawdown = calculateMaxDrawdown(currentEvents);
+  //console.log(maxDrawdown);
     
   //Costruisco il mio array di oggetti trade da passare ad "events" del fullCalendar.
   const calendarEvents = trades.map(trade => ({
