@@ -69,33 +69,30 @@ const Trading = (props) => {
       date: date,
     });
   }
-
-
+  //Utilizzo useRef per ottenere un riferimento al FullCalendar.
   const calendarRef = useRef(null);
   const handleCalendarRef = (calendar) => {
     calendarRef.current = calendar;
   };
-
+  
+  //Senza un riferimento al FullCalendar non è possibile accedere alle informaizoni sul mese e sull'anno correnti e memorizzarli nello stato.
+  //In base al mese 
   useEffect(() => {
+    //Estraggo mese e anno correnti visualizzati nel calendario e li salvo nello stato
     const handleDatesSet = (arg) => {
       const newMonth = arg.view.currentStart.getMonth() + 1;
       const newYear = arg.view.currentStart.getFullYear();
       setCurrentMonth(newMonth);
       setCurrentYear(newYear)
     };
-  
+    //Ottengo un riferimento all'API del calendario
     const calendarApi = calendarRef.current?.getApi();
-  
+    //Se calendarApi esiste viene aggiunto handleDataSet come gestore per l'evento dataSet utilizzando il metodo on
+    //handleDataSet viene chiamato ogni volta che la data visualizzata nel calendario cambia
     if (calendarApi) {
       calendarApi.on("datesSet", handleDatesSet);
     }
-  
-    return () => {
-      if (calendarApi) {
-        calendarApi.off("datesSet", handleDatesSet);
-      }
-    };
-  }, [setCurrentMonth]);
+  }, []);
   
   const currentEvents = trades.filter((trade) => {
     const eventDate = new Date(trade.date);
