@@ -8,63 +8,54 @@ import WeeklyProgressBar from "./WeeklyProgressBar";
 const WeeklyObjectives = (props)=>{
 
     const trades = useSelector(state=>state.trades.content)
+    //Funzione per formattare data in "gennaio 2024"
     const formatDate = (dateString) => {
-        const date = new Date(dateString.replace(/-/g, '/')); // Converti il formato della data
+        const date = new Date(dateString.replace(/-/g, '/')); 
         return format(date, 'MMMM yyyy', { locale: it });
-      };
-      
-      const selectedDate = new Date(props.selectedMonth + '/01');
-      const tradesOfTheMonth = trades.filter((trade) => {
-        const tradeDate = new Date(trade.date);
-        return (
-          tradeDate.getMonth() === selectedDate.getMonth() &&
-          tradeDate.getFullYear() === selectedDate.getFullYear()
-        );
-      });
+    };
+    //Creo un oggetto date del mese che ricevo da Objectives
+    const selectedDate = new Date(props.selectedMonth);
+    //Filtro trades, confrontando il mese e l'anno del singolo trade con la data che mi arriva da Objectives
+    const tradesOfTheMonth = trades.filter((trade) => {
+      const tradeDate = new Date(trade.date);
+      return (
+        tradeDate.getMonth() === selectedDate.getMonth() &&
+        tradeDate.getFullYear() === selectedDate.getFullYear()
+      );
+    });
     
-      const tradesByWeek = tradesOfTheMonth.reduce((acc, trade) => {
-        const weekStart = startOfWeek(new Date(trade.date));
-        const weekEnd = endOfWeek(new Date(trade.date));
-        const weekKey = format(weekStart, 'yyyy-MM-dd');
-        if (!acc[weekKey]) {
-          acc[weekKey] = {
-            trades: [],
-            interval: `${format(weekStart, 'd MMMM yyyy', { locale: it })} - ${format(
-              weekEnd,
-              'd MMMM yyyy',
-              { locale: it }
-            )}`,
-          };
-        }
-        acc[weekKey].trades.push(trade);
-        return acc;
-      }, {});
-    
-      const weeklyTotals = Object.entries(tradesByWeek).map(([weekKey, { trades, interval }]) => {
-        let cumulativeReward = 0;
-        let currentDrawdown = 0;
-        let maxDrawdown = 0;
-    
-        const totalReward = trades.reduce((total, trade) => {
-          const reward = parseInt(trade.reward, 10);
-          cumulativeReward += reward;
-    
-          currentDrawdown = Math.min(currentDrawdown + reward, 0);
-    
-          maxDrawdown = Math.min(maxDrawdown, currentDrawdown);
-    
-          return total + reward;
-        }, 0);
-    
-        const totalDrawdown = maxDrawdown;
-    
-        return {
-          weekKey,
-          totalReward,
-          totalDrawdown,
-          interval,
+    const tradesByWeek = tradesOfTheMonth.reduce((acc, trade) => {
+      const weekStart = startOfWeek(new Date(trade.date));
+      const weekEnd = endOfWeek(new Date(trade.date));
+      //Creo la chiave weekKey
+      const weekKey = format(weekStart, 'yyyy-MM-dd');
+      //Se la chiave non viene trovata inizializzo l'oggetto con chiave weekKey
+      if (!acc[weekKey]) {
+        acc[weekKey] = {
+          trades: [],
+          //Rappresenta l'intervallo della settimana
+          interval: `${format(weekStart, 'd MMMM yyyy', { locale: it })} - ${format(
+            weekEnd,
+            'd MMMM yyyy',
+            { locale: it }
+          )}`,
         };
-      });
+      }
+      //Metto tutti i trade di quel intervallo settimanale dentro l'array
+      acc[weekKey].trades.push(trade);
+      return acc;
+    }, {});
+     // Ottengo un array di oggetti, in cui ogni oggetto ha le proprietà weekKey, totalReward, totalDrawdown e interval
+    const weeklyTotals = Object.entries(tradesByWeek).map(([weekKey, { trades, interval }]) => ({
+      weekKey,
+      totalReward: trades.reduce((total, trade) => total + parseInt(trade.reward, 10), 0),
+      totalDrawdown: trades.reduce((maxDrawdown, trade) => {
+        const reward = parseInt(trade.reward, 10);
+        const currentDrawdown = Math.min(maxDrawdown + reward, 0);
+        return Math.min(maxDrawdown, currentDrawdown);
+      }, 0),
+      interval,
+      }));    
       console.log(weeklyTotals)
 
     return (

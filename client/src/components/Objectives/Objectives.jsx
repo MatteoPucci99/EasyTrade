@@ -8,7 +8,10 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Objectives = (props)=>{
     const [selectedMonth, setSelectedMonth] = useState()
+    //Stato per gestire la visualizzazione di WeeklyObkectives
     const [isWeeklyObjectivesOpen, setWeeklyObjectivesOpen] = useState(false);
+    //Funzione da passare come prop a MonthlyResult per gestire il mese selezionato e l'apparizione del componente WeeklyObjectives
+    //che mostrerà le settimane operative del mese selezionato.
     const handleSelectedMonth = (month) => {
         setSelectedMonth(month);
         setWeeklyObjectivesOpen(true);
