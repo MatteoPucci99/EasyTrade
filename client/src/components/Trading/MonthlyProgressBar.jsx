@@ -7,15 +7,19 @@ const MonthlyProgressBar = (props)=>{
     
    
 
-
+    //Calcolo in percentuale di totalProfit e maxDrawdow per riempire la progressBar
     const progressBarProfit = Math.min(parseInt((props.totalProfit / props.singleStrategy?.targets.month.profit) * 100),100)
     const progressBarDd = Math.min(parseInt((props.maxDrawdown / props.singleStrategy?.targets.month.dd) * 100),100)
+    //Controllo se le progressBar hanno raggiunto l'ampiezza massima
     const isFullWidthProfit = progressBarProfit === 100;
     const isFullWidthDd = progressBarDd === 100;
+    //Funzione per convertire la prima lettera in maiuscolo.
     const firstLetterUpperCase = (str)=>{
         return str.charAt(0).toUpperCase() + str.slice(1)
     }
+    //Formatto la data in MMMM yyyy (dicembre 2023)
     const formattedDate = format(new Date(props.currentYear, props.currentMonth - 1, 1), 'MMMM yyyy', { locale: itLocale });
+    //Formatto la stringa in es: Dicembre 2023
     const upperCaseDate = firstLetterUpperCase(formattedDate);
 
 
