@@ -24,17 +24,21 @@ const MonthlyResult = (props)=>{
           return `${month}/${year}`;
         };
   
-        // Filtra e raggruppa i trade per mese
+        // Filtro e raggrupp0 i trade per mese
         const tradesByMonth = trades.reduce((acc, trade) => {
+          //Creo la chiave di "ricerca" 
           const monthKey = getMonthFromDateString(trade.date);
+          //Se la chiave non viene trovata nell'oggetto la inizializzo e come valore gli do un array vuoto
           if (!acc[monthKey]) {
             acc[monthKey] = [];
           }
+          //Inserisco dentro quell'array i trade corrispondenti.
           acc[monthKey].push(trade);
+          //Ottengo un oggetto che ha come chiave le date e come valori array dei trades corrispondenti a quel mese.
           return acc;
         }, {});
     
-       // Calcola il total reward e total drawdown per ogni mese
+       // Ottengo un array di oggetti, in cui ogni oggetto ha le proprietà month, totalReward e totalDrawdown.
        const monthlyTotals = Object.entries(tradesByMonth).map(([month, trades]) => ({
         month,
         totalReward: trades.reduce((total, trade) => total + parseInt(trade.reward, 10), 0),
@@ -43,16 +47,10 @@ const MonthlyResult = (props)=>{
           const currentDrawdown = Math.min(maxDrawdown + reward, 0);
           return Math.min(maxDrawdown, currentDrawdown);
         }, 0),
-      }));
-       
+        }));       
              // Ordina l'array in base alla data
-             monthlyTotals.sort((a, b) => {
-               // Confronto delle stringhe delle date nel formato "YYYY/MM"
-               if (a.month < b.month) return -1;
-               if (a.month > b.month) return 1;
-               return 0;
-             });
-    
+             monthlyTotals.sort((a, b) => a.month - b.month);
+
         setMonthlyData(monthlyTotals);
       }, [trades]);
 
