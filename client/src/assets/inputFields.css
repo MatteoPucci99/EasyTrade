@@ -1,0 +1,46 @@
+/* INPUT */
+input {
+  background-color: rgb(33, 43, 54);
+  border: 1px solid rgba(197, 197, 197, 0.418);
+  border-radius: 5px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 35px;
+  padding: 20px;
+}
+
+input:hover {
+  border: 1px solid rgb(255, 255, 255);
+}
+input:focus ~ label,
+input:not(:placeholder-shown):not(:focus) ~ label {
+  position: absolute;
+  top: -12px;
+  left: 13px;
+  background-color: rgb(33, 43, 54);
+  color: rgb(255, 255, 255);
+  font-size: smaller;
+  transition: 0.15s ease-out;
+}
+label {
+  position: absolute;
+  top: 10px;
+  left: 13px;
+  background-color: rgb(33, 43, 54);
+  color: rgba(255, 255, 255, 0.418);
+  transition: 0.15s ease-out;
+  pointer-events: none;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.input-container {
+  position: relative;
+}
+
+.boxshadow {
+  box-shadow: 4px 4px 21px 4px rgba(0, 0, 0, 0.5);
+}

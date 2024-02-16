@@ -1,0 +1,68 @@
+/* CALENDAR STYLE */
+
+.fc-toolbar-chunk > div {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.fc {
+  color: white;
+}
+
+.fc-col-header-cell-cushion {
+  color: white;
+  text-decoration: none;
+}
+
+.fc-daygrid-day-number {
+  color: white;
+  text-decoration: none;
+}
+
+tbody {
+  color: white;
+}
+
+.fc-next-button .fc-butto .fc-button-primary {
+  border-radius: 50px;
+}
+#fc-dom-1 {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+:root {
+  --fc-small-font-size: 0.85em;
+  --fc-page-bg-color: #fff;
+  --fc-neutral-bg-color: rgba(208, 208, 208, 0.3);
+  --fc-neutral-text-color: #ffffff;
+  --fc-border-color: #ffffff62;
+
+  --fc-button-text-color: #fff;
+  --fc-button-bg-color: rgb(33, 43, 54);
+  --fc-button-border-color: rgb(33, 43, 54);
+  --fc-button-hover-bg-color: #253646;
+  --fc-button-hover-border-color: #253646;
+  --fc-button-active-bg-color: #1a252f00;
+  --fc-button-active-border-color: #151e2700;
+
+  --fc-event-bg-color: #3788d800;
+  --fc-event-border-color: #3788d800;
+  --fc-event-text-color: #fff;
+  --fc-event-selected-overlay-color: rgba(0, 0, 0, 0.25);
+
+  --fc-more-link-bg-color: #d0d0d0;
+  --fc-more-link-text-color: white;
+
+  --fc-event-resizer-thickness: 8px;
+  --fc-event-resizer-dot-total-width: 8px;
+  --fc-event-resizer-dot-border-width: 1px;
+
+  --fc-non-business-color: rgba(215, 215, 215, 0.3);
+  --fc-bg-event-color: rgb(143, 223, 130);
+  --fc-bg-event-opacity: 0.3;
+  --fc-highlight-color: rgba(188, 232, 241, 0.3);
+  --fc-today-bg-color: rgba(255, 220, 40, 0.15);
+  --fc-now-indicator-color: red;
+}

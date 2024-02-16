@@ -1,0 +1,35 @@
+/* PROGRESS BAR STYLE */
+.progress-container {
+  height: 30px;
+  background-color: rgb(51, 61, 72);
+  border-radius: 10px;
+}
+
+.progress-bar {
+  background-color: rgb(94, 161, 59) !important;
+  width: 0%;
+  z-index: 2;
+  height: 30px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: width 1s ease !important;
+}
+.full-width-bar {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.dd-container {
+  height: 30px;
+  background-color: rgb(51, 61, 72);
+  border-radius: 10px;
+}
+
+.dd-bar {
+  background-color: rgb(185, 82, 79) !important;
+  width: 0%;
+  z-index: 2;
+  height: 30px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  transition: width 1s ease !important;
+}

@@ -60,7 +60,7 @@ function App() {
           <Row className="ms-1 posRow">
             <Col
               className={`${
-                showSidebar ? "onCanvas" : "d-none d-lg-block col-lg-2"
+                showSidebar ? "mySidebar" : "d-none d-lg-block col-lg-2"
               }`}
               style={{ width: "300px", height: "95vh" }}
             >

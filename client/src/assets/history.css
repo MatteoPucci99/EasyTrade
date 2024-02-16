@@ -1,0 +1,46 @@
+/* TAKE PROFIT , STOPLOSS & BREAKEVEN TAG */
+.sl {
+  background-color: rgb(61, 46, 55);
+  color: rgb(201, 88, 88);
+  padding-left: 10px;
+  width: 63%;
+  border-radius: 7px;
+}
+.tp {
+  background-color: rgb(43, 62, 54);
+  color: rgb(114, 184, 79);
+  padding-left: 10px;
+  width: 70%;
+  border-radius: 7px;
+}
+
+.be {
+  background-color: rgb(69, 67, 46);
+  color: rgb(232, 205, 98);
+  padding-left: 10px;
+  width: 68%;
+  border-radius: 7px;
+}
+/* HOVER ROW */
+.hover {
+  transition: all 0.3s ease-in-out;
+}
+.hover:hover {
+  background-color: rgb(40, 51, 63);
+}
+
+/* HOVER ICON */
+.hoverIcon {
+  transition: all 0.3s ease-in-out;
+}
+.hoverIcon:hover {
+  background-color: rgb(49, 59, 70);
+}
+
+/* BUY & SELL */
+.buyType {
+  color: rgb(94, 161, 59);
+}
+.sellType {
+  color: rgb(185, 82, 79);
+}

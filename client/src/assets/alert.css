@@ -1,0 +1,30 @@
+/* ALERT POSITION E TRANSITION */
+.alertPosition {
+  width: 350px;
+  position: fixed !important;
+  top: -70px;
+  right: 750px;
+  opacity: 0; /* Imposta l'opacità iniziale a 0 (completamente invisibile) */
+  animation: fadeInOut 1.2s ease;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    top: -70px;
+  }
+  30% {
+    opacity: 1;
+    top: 70px;
+  }
+
+  70% {
+    opacity: 1;
+    top: 70px;
+  }
+
+  100% {
+    opacity: 0;
+    top: 70px;
+  }
+}

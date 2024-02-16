@@ -1,0 +1,17 @@
+/* DELETE ICON ON STRATEGY SECTION */
+.deleteCross {
+  color: gray;
+  transition: color 0.3s ease-in-out;
+}
+
+.deleteCross:hover {
+  color: rgb(165, 165, 165);
+}
+
+/* DELETE ICON ON TRADING SECTION */
+.deleteIcon {
+  transition: background-color 0.2s ease;
+}
+.deleteIcon:hover {
+  background-color: rgba(177, 177, 177, 0.315);
+}

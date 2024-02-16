@@ -1,0 +1,64 @@
+#sideBar {
+  position: fixed;
+  top: 80px;
+  width: 300px;
+  z-index: 1001;
+}
+
+/* HANDLE SIDEBAR FOR MOBILE */
+.mySidebar {
+  position: fixed;
+  top: 80px;
+  width: 300px;
+  z-index: 1001;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* SIDEBAR DROPDOWN ANIMATION */
+@keyframes vibrate {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+  75% {
+    transform: translateX(-2px);
+  }
+  100% {
+    transform: translateX(2px);
+  }
+}
+
+.vibrate {
+  animation: vibrate 0.5s ease-in-out infinite;
+}
+.pulsate {
+  animation: pulsateAnimation 2s infinite;
+}
+
+@keyframes pulsateAnimation {
+  0% {
+    color: rgb(130, 146, 118);
+    transform: scale(1);
+  }
+  50% {
+    color: rgb(255, 187, 0); /* Cambia colore a tuo piacimento */
+    transform: scale(1.05);
+  }
+  100% {
+    color: rgb(130, 146, 118);
+    transform: scale(1);
+  }
+}

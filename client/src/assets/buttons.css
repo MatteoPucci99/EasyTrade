@@ -1,0 +1,66 @@
+/* GENERAL BUTTONS */
+
+.save {
+  background-color: rgb(130, 146, 118);
+  border-radius: 7px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+.save:hover {
+  background-color: rgb(109, 131, 93);
+}
+.delete {
+  background-color: rgb(208, 61, 61);
+  border-radius: 7px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+.delete:hover {
+  background-color: rgb(168, 47, 47);
+}
+
+/* FORM BUTTONS */
+.tradeButton {
+  border: none;
+  width: 50%;
+  height: 40px;
+}
+
+.tradeButton.sell {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 1px solid rgb(208, 61, 61);
+  border-left: none;
+  font-weight: bold;
+  color: rgb(208, 61, 61);
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+.tradeButton.buy {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 1px solid rgb(94, 161, 59);
+  font-weight: bold;
+  color: rgb(94, 161, 59);
+  background-color: transparent;
+  border-right: none;
+  transition: all 0.3s ease-in-out;
+}
+.selectedSell {
+  background-color: rgb(208, 61, 61) !important;
+  color: white !important;
+}
+.selectedBuy {
+  background-color: rgb(94, 161, 59) !important;
+  color: white !important;
+}
+
+#tradeButtonContainer {
+  width: 80%;
+}
