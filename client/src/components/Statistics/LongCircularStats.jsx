@@ -5,8 +5,9 @@ import { useSelector } from "react-redux";
 
 const LongCircularStats = ()=>{
     const trades = useSelector(state=>state.trades.content)
+    //Filtro i trade in base al tipo "Compra"
     const buyTrades = trades.filter(trade => trade.type === 'Compra');
-   
+   //Calcolo la percentuale di "buytrades" rispetto al totale
     const buyTradesRate = (buyTrades.length / trades.length * 100).toFixed(2)
    
   

@@ -5,6 +5,7 @@ import { Tooltip } from "react-tooltip";
 
 const Expectancy = ()=>{
     const trades = useSelector(state=>state.trades.content)
+    //Calcolo dell'expectancy
     const takeProfitTrades = trades.filter(trade => trade.result === 'Take Profit');   
     const winRate = (takeProfitTrades.length / trades.length).toFixed(2)
     const lossRate = 1 - winRate
