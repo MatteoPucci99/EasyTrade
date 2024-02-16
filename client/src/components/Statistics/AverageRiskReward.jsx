@@ -6,13 +6,20 @@ import { Tooltip } from "react-tooltip";
 const AverageRiskReward = ()=>{
 
     const trades = useSelector(state=>state.trades.content)
+    //Array con soli takeprofit 
     const takeProfitTrades = trades.filter(trade => trade.result === 'Take Profit');  
+    //Array con soli stoploss 
     const stopLossTrades = trades.filter(trade => trade.result === 'Stop Loss');   
+    //Calcolo la perdita totale 
     const lossSum = stopLossTrades.reduce ((acc,trade)=> acc+parseInt(trade.reward, 10),0)
+    //Calcolo il guadagno totale
     const gainSum = takeProfitTrades.reduce( (acc, trade) => acc + parseInt(trade.reward, 10),
     0)
+    //Calcolo il guadagno medio
     const avgWin = (gainSum / takeProfitTrades.length).toFixed(2)
+    //Calcolo la perdita media
     const avgLoss = (lossSum / stopLossTrades.length).toFixed(2)
+    //Calcolo il winrate finale
     const avgRiskReward = Math.abs((avgWin / avgLoss).toFixed(2))
 
  
@@ -28,8 +35,6 @@ const AverageRiskReward = ()=>{
                 <h4>Risk reward medio</h4>
             </div>
             <Tooltip id="my-tooltip"/>
-      
-
     </Container>
     )
 }

@@ -5,19 +5,22 @@ import { useSelector } from "react-redux";
 const EquityLine = ()=>{
 
     const trades = useSelector(state=>state.trades.content)
+    //Ordino i trades in ordine crescente di data
     const orderedTrades = [...trades].sort((a, b) => new Date(a.date) - new Date(b.date));
+    //Ottengo un array con tutti i reward in ordine di data
     const tradesRewardNum = orderedTrades.map(el=>parseInt(el.reward))
-   
+
+    //Ottengo la somma cumulativa di tutti i reward
     const tradesRewardSum = tradesRewardNum.reduce((acc, value, index) => {
         if (index === 0) {
-          // Se è il primo elemento, aggiungi il valore all'array risultante
+          // Se è il primo elemento dell'array aggiungo value come primo elemento
           return [...acc, value];
         } else {
-          // Altrimenti, aggiungi la somma del valore corrente con l'ultimo valore nell'array risultante
+          // Altrimenti, aggiungo la somma del valore corrente con l'elemento precedente a value.
           return [...acc, value + acc[index - 1]];
         }
       }, []);
-     
+     //Ottengo tutti gli indici dei trades aumentati di 1, per la visualizzazione ordinata dei trade lungo l'asse x del Equity line
       const numberOfTrades = tradesRewardSum.map((value, index) => index + 1);
 
 
