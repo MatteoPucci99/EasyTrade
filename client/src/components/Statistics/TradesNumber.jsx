@@ -6,6 +6,7 @@ import { useSelector } from "react-redux"
 
 
 const TradeNumber = ()=>{
+  //Calcolo il numero totale di trade vincenti, perdenti e in pari.
     const trades = useSelector(state=>state.trades.content)
     const takeProfitTrades = trades.filter(trade => trade.result === 'Take Profit');
     const stopLossTrades = trades.filter (trade => trade.result === 'Stop Loss' );

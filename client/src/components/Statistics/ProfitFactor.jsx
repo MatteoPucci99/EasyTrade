@@ -4,6 +4,7 @@ import { Tooltip } from "react-tooltip";
 
 
 const ProfitFactor = ()=>{
+    //Calcolo del profitFactor
     const trades = useSelector(state=>state.trades.content)
     const takeProfitTrades = trades.filter(trade => trade.result === 'Take Profit');
     const stopLossTrades = trades.filter(trade=>trade.result === 'Stop Loss')
