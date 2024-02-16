@@ -183,6 +183,8 @@ const Trading = (props) => {
   const [typeStatus, setTypeStatus] = useState()
   const tradeType = ['Take Profit', 'Stop Loss', 'Break Even']
     
+  //Quando viene chiuso il modale di creazione trade vengono resettati gli stati così all'apertura di un nuovo modale i campi Pair, TypeStatus e SelectedButton
+  //saranno allo stato di default.
   const handleCloseModal = ()=>{
       setShowModal(false)
       setPairSelected()
@@ -279,45 +281,32 @@ const Trading = (props) => {
      date: formattedDate,
      _id: trade._id
     })
+    //Viene settato lo stato in base al tipo ti trade "Compra" o "Vendi"
+    setSelectedButton(sendData.type)
   }
-  
-  useEffect(() => {
-    if (isClickedEvent) {
-      setSelectedButton(sendData.type || 'Compra');
-    }
-  }, [isClickedEvent]);
-  
+
+  //In base al typeStatus viene settato il reward.
+  //Essendoci un collegamento bilaterale tra input e stato sendData, l'input si popolerà in base al typeStatus.
+  //In particolare StopLoss e BreakEven che saranno gli unici input con valore di default
   useEffect(() => {
     if(typeStatus === 'Take Profit')
-    {setSendData({...sendData, reward: "" });} else if (typeStatus === 'Stop Loss') {
+    {setSendData({...sendData, reward: "" });} 
+    else if (typeStatus === 'Stop Loss') {
       setSendData({...sendData, reward: (-sendData.risk).toString()})
     } else {
       setSendData({...sendData, reward:'0'})
     }
   }, [typeStatus]);
 
+  //Funzione per gestire input Esito
   const handleInputChange = (e) => {
     const value = e.target.value;
-  
     // Se il tipo è "Take Profit", accetta solo numeri positivi
     if (typeStatus === 'Take Profit') {
       // Rimuovi il segno meno (se presente) e verifica se è un numero positivo
       if (/^\d*\.?\d*$/.test(value)) {
         setSendData({ ...sendData, reward: value });
       }
-    }
-    else if (typeStatus === 'Stop Loss') {
-      // Verifica se è un numero negativo
-      if (/^-\d*\.?\d*$/.test(value)) {
-        setSendData({ ...sendData, reward: value });
-      } else {
-        // Se l'input è vuoto, setta reward a una stringa vuota
-        setSendData({ ...sendData, reward: '' });
-      }
-    }
-    // Se il tipo è "Break Even", imposta automaticamente l'esito a zero
-    else if (typeStatus === 'Break Even') {
-      setSendData({ ...sendData, reward: '0' });
     }
   };
   
